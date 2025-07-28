@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shorts Collection - My Mom's Clothing Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      padding-top: 70px;
+    }
+
+    .subproduct-header {
+      background-color: #c92121;
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s;
+      width: 40px;
+      justify-content: center;
+    }
+
+    .back-btn:hover {
+      opacity: 0.8;
+      color: white;
+    }
+
+    @media (max-width: 767.98px) {
+      .header-content {
+        display: grid;
+        grid-template-columns: 40px 1fr 40px;
+        align-items: center;
+        padding: 0 1rem;
+      }
+      
+      .logo-container {
+        grid-column: 2;
+        display: flex;
+        justify-content: center;
+      }
+      
+      .back-btn-container {
+        grid-column: 1;
+      }
+      
+      .spacer {
+        grid-column: 3;
+        width: 40px;
+      }
+    }
+
+    .product-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 1.5rem;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 991.98px) {
+      .product-card img {
+        height: 380px;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .product-card img {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .product-card img {
+        height: 450px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .product-card img {
+        height: 400px;
+      }
+    }
+
+    .product-card-body {
+      padding: 1rem;
+    }
+
+    .product-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card .price {
+      color: #d6336c;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .product-card .btn {
+      display: block;
+      background-color: #c92121;
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .product-card .btn:hover {
+      background-color: #a81b1b;
+    }
+
+    .pagination-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 30px 0;
+      align-items: center;
+    }
+
+    .pagination-container button {
+      padding: 8px 15px;
+      border: none;
+      background-color: #d6336c;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .pagination-container button:disabled {
+      background-color: #aaa;
+      cursor: default;
+    }
+
+    .pagination-container select {
+      padding: 8px 15px;
+      border: none;
+      background-color: #ffccda;
+      color: #333;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .pagination-container button:hover:not(:disabled) {
+      background-color: #c92121;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .social-icons {
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 10px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: #c92121;
+      transform: translateY(-3px);
+    }
+
+    .footer-links {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffdddd;
+      text-decoration: underline;
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .highlighted-product {
+      animation: highlight 2s ease-in-out;
+      box-shadow: 0 0 0 4px #d6336c;
+      position: relative;
+      padding-top: 20px;
+      margin-top: -20px;
+    }
+
+    .highlighted-product::before {
+      content: "";
+      display: block;
+      height: 70px;
+      margin-top: -70px;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .highlighted-product::after {
+      content: "★";
+      position: absolute;
+      top: 10px;
+      right: -10px;
+      background: #d6336c;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      z-index: 10;
+    }
+
+    @keyframes highlight {
+      0% { box-shadow: 0 0 0 4px #d6336c; }
+      50% { box-shadow: 0 0 0 8px rgba(214, 51, 108, 0.5); }
+      100% { box-shadow: 0 0 0 4px #d6336c; }
+    }
+
+    @media (max-width: 767.98px) {
+      .highlighted-product {
+        padding-top: 15px;
+        margin-top: -15px;
+      }
+      
+      .highlighted-product::before {
+        height: 60px;
+        margin-top: -60px;
+      }
+      
+      .highlighted-product::after {
+        top: 5px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+      }
+    }
+
+    .product-col {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="subproduct-header">
+    <div class="header-content">
+      <div class="back-btn-container">
+        <a href="products.html" class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      </div>
+      
+      <div class="logo-container">
+        <a href="index.html">
+          <img src="images/PommeLogo-removebg-preview1 (1).png" alt="My Mom's Shop" class="logo-img">
+        </a>
+      </div>
+      
+      <div class="spacer"></div>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <h2 class="mb-4 text-center" data-key="shorts-collection">Shorts Collection</h2>
+    <div class="row g-4" id="product-grid"></div>
+
+    <div class="pagination-container">
+      <button id="backBtn" class="btn" data-key="all-categories">
+        <i class="fas fa-arrow-left me-1"></i> All Categories
+      </button>
+      <button id="prevBtn" data-key="previous">Previous</button>
+      <select id="pageSelect"></select>
+      <span id="pageStatus">1/1</span>
+      <button id="nextBtn" data-key="next">Next</button>
+      <button id="firstBtn" class="btn-danger" style="display: none;" data-key="first-page">First Page</button>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p data-key="footer-copy">&copy; 2025 My Mom's Clothing Shop | Designed by Dariel</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="contact.html" data-key="footer-contact">Contact</a>
+        <a href="privacy.html" data-key="privacy">Privacy Policy</a>
+        <a href="terms.html" data-key="terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      { id: 1, name: "Classic Denim Shorts", alName: "Pantalona të Shkurtra Xhinse", price: 3200, image: "images/shorts/denim.jpg", description: "Timeless denim shorts with perfect fit", alDescription: "Pantalona të shkurtra xhinse me përshtatje perfekte" },
+      { id: 2, name: "Linen Summer Shorts", alName: "Pantalona Verore Pambuk", price: 2800, image: "images/shorts/linen.jpg", description: "Breathable linen shorts for hot days", alDescription: "Pantalona verore pambuk për ditë të nxehta" },
+      { id: 3, name: "Athletic Running Shorts", alName: "Pantalona Sportive për Vrapim", price: 2500, image: "images/shorts/running.jpg", description: "Performance running shorts with moisture-wicking", alDescription: "Pantalona sportive për vrapim që thithin lagështirën" },
+      { id: 4, name: "High-Waisted Shorts", alName: "Pantalona me Bel të Lartë", price: 2900, image: "images/shorts/highwaist.jpg", description: "Flattering high-waisted shorts", alDescription: "Pantalona të shkurtra me bel të lartë që përshtaten bukur" },
+      { id: 5, name: "Cargo Shorts", alName: "Pantalona Cargo", price: 3500, image: "images/shorts/cargo.jpg", description: "Practical cargo shorts with multiple pockets", alDescription: "Pantalona praktike cargo me shumë xhepa" },
+      { id: 6, name: "Bermuda Shorts", alName: "Pantalona Bermuda", price: 3100, image: "images/shorts/bermuda.jpg", description: "Classic bermuda length shorts", alDescription: "Pantalona klasike në gjatësi bermuda" },
+      { id: 7, name: "Chino Shorts", alName: "Pantalona Chino", price: 3300, image: "images/shorts/chino.jpg", description: "Smart casual chino shorts", alDescription: "Pantalona të shkurtra chino për veshje smart casual" },
+      { id: 8, name: "Biker Shorts", alName: "Pantalona Biker", price: 2700, image: "images/shorts/biker.jpg", description: "Trendy biker-style shorts", alDescription: "Pantalona moderne në stil biker" },
+      { id: 9, name: "Pleated Dress Shorts", alName: "Pantalona të Shkurtra me Palosje", price: 3600, image: "images/shorts/pleated.jpg", description: "Elegant pleated dress shorts", alDescription: "Pantalona elegante të shkurtra me palosje" },
+      { id: 10, name: "Seersucker Shorts", alName: "Pantalona Seersucker", price: 3400, image: "images/shorts/seersucker.jpg", description: "Summer seersucker shorts", alDescription: "Pantalona verore seersucker" },
+      { id: 11, name: "Lace Trim Shorts", alName: "Pantalona me Dantelle", price: 3800, image: "images/shorts/lace.jpg", description: "Feminine shorts with lace trim", alDescription: "Pantalona femërore me dantelle" },
+      { id: 12, name: "Hiking Shorts", alName: "Pantalona Ecjeje", price: 3900, image: "images/shorts/hiking.jpg", description: "Durable hiking shorts with UPF protection", alDescription: "Pantalona të qëndrueshme për ecje me mbrojtje UPF" },
+      { id: 13, name: "Tie-Dye Shorts", alName: "Pantalona Tie-Dye", price: 3000, image: "images/shorts/tiedye.jpg", description: "Colorful tie-dye pattern shorts", alDescription: "Pantalona me ngjyra të ndara në stil tie-dye" },
+      { id: 14, name: "Linen Blend Shorts", alName: "Pantalona me Përzierje Pambuku", price: 3200, image: "images/shorts/linenblend.jpg", description: "Comfortable linen blend shorts", alDescription: "Pantalona të rehatshme me përzierje pambuku" },
+      { id: 15, name: "Basketball Shorts", alName: "Pantalona Basketbolli", price: 2800, image: "images/shorts/basketball.jpg", description: "Sporty basketball shorts", alDescription: "Pantalona sportive basketbolli" },
+      { id: 16, name: "Corduroy Shorts", alName: "Pantalona Pambuk me Brinjë", price: 3700, image: "images/shorts/corduroy.jpg", description: "Classic corduroy shorts", alDescription: "Pantalona klasike pambuk me brinjë" },
+      { id: 17, name: "Paperbag Waist Shorts", alName: "Pantalona me Bel Si Qese", price: 4100, image: "images/shorts/paperbag.jpg", description: "Trendy paperbag waist shorts", alDescription: "Pantalona moderne me bel në formë qese" },
+      { id: 18, name: "Swim Shorts", alName: "Pantalona Noti", price: 2900, image: "images/shorts/swim.jpg", description: "Quick-dry swim shorts", alDescription: "Pantalona noti që thahen shpejt" },
+      { id: 19, name: "Cuffed Denim Shorts", alName: "Pantalona Xhinse me Palosje", price: 3300, image: "images/shorts/cuffed.jpg", description: "Stylish cuffed denim shorts", alDescription: "Pantalona xhinse elegante me palosje" },
+      { id: 20, name: "Linen Drawstring Shorts", alName: "Pantalona Pambuk me Rrip", price: 3100, image: "images/shorts/drawstring.jpg", description: "Comfortable drawstring linen shorts", alDescription: "Pantalona të rehatshme pambuk me rrip" },
+      { id: 21, name: "Camo Print Shorts", alName: "Pantalona me Print Camo", price: 3400, image: "images/shorts/camo.jpg", description: "Military-inspired camo print shorts", alDescription: "Pantalona me print camo me frymë ushtarake" },
+      { id: 22, name: "Tennis Shorts", alName: "Pantalona Tenisi", price: 3600, image: "images/shorts/tennis.jpg", description: "Performance tennis shorts", alDescription: "Pantalona profesionale për tenis" },
+      { id: 23, name: "Waxed Cotton Shorts", alName: "Pantalona me Pambuk të Dylluar", price: 3800, image: "images/shorts/waxed.jpg", description: "Water-resistant waxed cotton shorts", alDescription: "Pantalona me pambuk të dylluar rezistente ndaj ujit" },
+      { id: 24, name: "Patchwork Shorts", alName: "Pantalona Patchwork", price: 4200, image: "images/shorts/patchwork.jpg", description: "Unique patchwork design shorts", alDescription: "Pantalona me dizajn unik patchwork" },
+      { id: 25, name: "Lounge Shorts", alName: "Pantalona Relax", price: 2700, image: "images/shorts/lounge.jpg", description: "Comfortable lounge shorts", alDescription: "Pantalona të rehatshme për relaks" },
+      { id: 26, name: "Cargo Denim Shorts", alName: "Pantalona Xhinse Cargo", price: 3900, image: "images/shorts/cargodenim.jpg", description: "Denim shorts with cargo pockets", alDescription: "Pantalona xhinse me xhepa cargo" },
+      { id: 27, name: "Golf Shorts", alName: "Pantalona Golfi", price: 3700, image: "images/shorts/golf.jpg", description: "Performance golf shorts", alDescription: "Pantalona profesionale për golf" },
+      { id: 28, name: "Bermuda Chino Shorts", alName: "Pantalona Bermuda Chino", price: 3500, image: "images/shorts/bermudachino.jpg", description: "Classic bermuda length chino shorts", alDescription: "Pantalona klasike bermuda chino" },
+      { id: 29, name: "Linen Culottes", alName: "Pantalona të Shkurtra Linen", price: 4000, image: "images/shorts/culottes.jpg", description: "Flowy linen culotte shorts", alDescription: "Pantalona të shkurtra dhe të lirshme linen" },
+      { id: 30, name: "Distressed Denim Shorts", alName: "Pantalona Xhinse me Vrima", price: 3600, image: "images/shorts/distressed.jpg", description: "Edgy distressed denim shorts", alDescription: "Pantalona xhinse moderne me vrima" },
+      { id: 31, name: "Terry Cloth Shorts", alName: "Pantalona Terry", price: 2900, image: "images/shorts/terry.jpg", description: "Soft terry cloth shorts", alDescription: "Pantalona të buta prej pëlhure terry" },
+      { id: 32, name: "Pleated Linen Shorts", alName: "Pantalona Linen me Palosje", price: 3800, image: "images/shorts/pleatedlinen.jpg", description: "Elegant pleated linen shorts", alDescription: "Pantalona elegante linen me palosje" },
+      { id: 33, name: "Board Shorts", alName: "Pantalona Surf", price: 3100, image: "images/shorts/board.jpg", description: "Quick-dry board shorts", alDescription: "Pantalona surf që thahen shpejt" },
+      { id: 34, name: "Twill Shorts", alName: "Pantalona Twill", price: 3400, image: "images/shorts/twill.jpg", description: "Classic twill fabric shorts", alDescription: "Pantalona klasike prej pëlhure twill" },
+      { id: 35, name: "Crochet Trim Shorts", alName: "Pantalona me Grep", price: 4200, image: "images/shorts/crochet.jpg", description: "Boho chic shorts with crochet trim", alDescription: "Pantalona në stil boho me grep" },
+      { id: 36, name: "Belted Shorts", alName: "Pantalona me Rrip", price: 3900, image: "images/shorts/belted.jpg", description: "Stylish belted shorts", alDescription: "Pantalona elegante me rrip" },
+      { id: 37, name: "Hemp Shorts", alName: "Pantalana Konopi", price: 4300, image: "images/shorts/hemp.jpg", description: "Eco-friendly hemp shorts", alDescription: "Pantalona miqësore me mjedis prej konopi" },
+      { id: 38, name: "Jersey Shorts", alName: "Pantalona Jersey", price: 2800, image: "images/shorts/jersey.jpg", description: "Comfortable jersey shorts", alDescription: "Pantalona të rehatshme jersey" },
+      { id: 39, name: "Stretch Denim Shorts", alName: "Pantalona Xhinse Elastike", price: 3700, image: "images/shorts/stretch.jpg", description: "Comfortable stretch denim shorts", alDescription: "Pantalona xhinse të rehatshme elastike" },
+      { id: 40, name: "Pinstripe Shorts", alName: "Pantalona me Vija të Holla", price: 3500, image: "images/shorts/pinstripe.jpg", description: "Classic pinstripe shorts", alDescription: "Pantalona klasike me vija të holla" },
+      { id: 41, name: "Lace-Up Shorts", alName: "Pantalona me Lidhje", price: 4100, image: "images/shorts/laceup.jpg", description: "Trendy lace-up detail shorts", alDescription: "Pantalona moderne me detaje lidhje" },
+      { id: 42, name: "Tencel Shorts", alName: "Pantalona Tencel", price: 4400, image: "images/shorts/tencel.jpg", description: "Sustainable Tencel fabric shorts", alDescription: "Pantalona të qëndrueshme prej pëlhure Tencel" },
+      { id: 43, name: "Side Stripe Shorts", alName: "Pantalona me Vija Anësore", price: 3600, image: "images/shorts/sidestripe.jpg", description: "Sporty shorts with side stripes", alDescription: "Pantalona sportive me vija anësore" },
+      { id: 44, name: "Bamboo Fiber Shorts", alName: "Pantalona me Fibër Bambu", price: 4500, image: "images/shorts/bamboo.jpg", description: "Eco-friendly bamboo fiber shorts", alDescription: "Pantalona miqësore me mjedis me fibër bambu" },
+      { id: 45, name: "Ombre Dye Shorts", alName: "Pantalona me Ngjyra Ombre", price: 4200, image: "images/shorts/ombre.jpg", description: "Gradient ombre dyed shorts", alDescription: "Pantalona me ngjyra gradient ombre" },
+      { id: 46, name: "Ruffled Hem Shorts", alName: "Pantalona me Rrëshqitje", price: 3800, image: "images/shorts/ruffled.jpg", description: "Feminine shorts with ruffled hem", alDescription: "Pantalona femërore me rrëshqitje" },
+      { id: 47, name: "Reversible Shorts", alName: "Pantalona të Kthyeshme", price: 4700, image: "images/shorts/reversible.jpg", description: "Two-in-one reversible shorts", alDescription: "Pantalona 2-në-1 të kthyeshme" },
+      { id: 48, name: "Embroidered Shorts", alName: "Pantalona me Broderi", price: 4900, image: "images/shorts/embroidered.jpg", description: "Beautiful embroidered detail shorts", alDescription: "Pantalona me broderi të bukura" },
+      { id: 49, name: "Linen Wrap Shorts", alName: "Pantalona Linen me Mbështjellës", price: 4300, image: "images/shorts/wrap.jpg", description: "Flowy linen wrap shorts", alDescription: "Pantalona të lirshme linen me mbështjellës" },
+      { id: 50, name: "Custom Monogrammed Shorts", alName: "Pantalona të Personalizuara me Monogram", price: 5200, image: "images/shorts/monogram.jpg", description: "Personalized monogrammed shorts", alDescription: "Pantalona të personalizuara me monogram" }
+    ];
+
+    const productsPerPage = 8;
+    let currentPage = 1;
+    const totalPages = Math.ceil(products.length / productsPerPage);
+
+    const productGrid = document.getElementById("product-grid");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const firstBtn = document.getElementById("firstBtn");
+    const backBtn = document.getElementById("backBtn");
+    const pageStatus = document.getElementById("pageStatus");
+    const pageSelect = document.getElementById("pageSelect");
+
+    function getUrlParams() {
+      const params = {};
+      const queryString = window.location.search.substring(1);
+      const pairs = queryString.split('&');
+      
+      pairs.forEach(pair => {
+        const [key, value] = pair.split('=');
+        if (key && value) {
+          params[key] = decodeURIComponent(value);
+        }
+      });
+      
+      return params;
+    }
+
+    function highlightProduct(productId) {
+      const productElement = document.getElementById(`product-${productId}`);
+      if (productElement) {
+        productElement.classList.add('highlighted-product');
+        
+        setTimeout(() => {
+          const headerHeight = document.querySelector('.subproduct-header').offsetHeight;
+          const elementPosition = productElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    }
+
+    const urlParams = getUrlParams();
+    const highlightProductId = urlParams.highlight;
+    const requestedPage = urlParams.page ? parseInt(urlParams.page) : 1;
+
+    if (requestedPage && !isNaN(requestedPage) && requestedPage >= 1 && requestedPage <= totalPages) {
+      currentPage = requestedPage;
+    }
+
+    function renderProducts(page) {
+      productGrid.innerHTML = "";
+      const start = (page - 1) * productsPerPage;
+      const end = Math.min(start + productsPerPage, products.length);
+      const lang = localStorage.getItem("language") || "en";
+
+      for (let i = start; i < end; i++) {
+        const prod = products[i];
+        const col = document.createElement("div");
+        col.className = "col-12 col-sm-6 col-md-4 col-lg-3 product-col";
+        col.id = `product-${prod.id}`;
+
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <img src="${prod.image}" alt="${lang === 'al' ? prod.alName : prod.name}" class="img-fluid" onerror="this.onerror=null;this.src='images/shorts/default.jpg';" />
+          <div class="product-card-body">
+            <h3>${lang === 'al' ? prod.alName : prod.name}</h3>
+            <p data-key="shorts-desc" data-index="${prod.id}">${lang === 'al' ? prod.alDescription : prod.description}</p>
+            <p class="price">${lang === 'al' ? 'Cmimi' : 'Price'}: ${prod.price} L</p>
+            <a href="contact.html" class="btn" data-key="order-cta">${lang === 'al' ? 'Kontaktoni për Porosi' : 'Contact to Order'}</a>
+          </div>
+        `;
+        col.appendChild(card);
+        productGrid.appendChild(col);
+      }
+
+      pageStatus.textContent = `${page}/${totalPages}`;
+      prevBtn.disabled = page === 1;
+      nextBtn.disabled = page === totalPages;
+      firstBtn.style.display = page === totalPages && totalPages > 1 ? "inline-block" : "none";
+
+      pageSelect.innerHTML = "";
+      for (let i = 1; i <= totalPages; i++) {
+        const opt = document.createElement("option");
+        opt.value = i;
+        opt.textContent = `${lang === 'al' ? 'Faqja' : 'Page'} ${i}`;
+        if (i === page) opt.selected = true;
+        pageSelect.appendChild(opt);
+      }
+
+      if (highlightProductId) {
+        setTimeout(() => {
+          highlightProduct(highlightProductId);
+        }, 100);
+      }
+
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('page', page);
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderProducts(currentPage);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderProducts(currentPage);
+      }
+    });
+
+    firstBtn.addEventListener("click", () => {
+      currentPage = 1;
+      renderProducts(currentPage);
+    });
+
+    pageSelect.addEventListener("change", (e) => {
+      currentPage = parseInt(e.target.value);
+      renderProducts(currentPage);
+    });
+
+    backBtn.addEventListener("click", () => {
+      window.location.href = "products.html";
+    });
+
+    renderProducts(currentPage);
+  </script>
+  <script src="js/lang.js"></script>
+</body>
+</html>

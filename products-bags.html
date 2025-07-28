@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bags Collection - My Mom's Clothing Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      padding-top: 70px;
+    }
+
+    .subproduct-header {
+      background-color: #c92121;
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s;
+      width: 40px;
+      justify-content: center;
+    }
+
+    .back-btn:hover {
+      opacity: 0.8;
+      color: white;
+    }
+
+    @media (max-width: 767.98px) {
+      .header-content {
+        display: grid;
+        grid-template-columns: 40px 1fr 40px;
+        align-items: center;
+        padding: 0 1rem;
+      }
+      
+      .logo-container {
+        grid-column: 2;
+        display: flex;
+        justify-content: center;
+      }
+      
+      .back-btn-container {
+        grid-column: 1;
+      }
+      
+      .spacer {
+        grid-column: 3;
+        width: 40px;
+      }
+    }
+
+    .product-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 1.5rem;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 991.98px) {
+      .product-card img {
+        height: 380px;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .product-card img {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .product-card img {
+        height: 450px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .product-card img {
+        height: 400px;
+      }
+    }
+
+    .product-card-body {
+      padding: 1rem;
+    }
+
+    .product-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card .price {
+      color: #d6336c;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .product-card .btn {
+      display: block;
+      background-color: #c92121;
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .product-card .btn:hover {
+      background-color: #a81b1b;
+    }
+
+    .pagination-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 30px 0;
+      align-items: center;
+    }
+
+    .pagination-container button {
+      padding: 8px 15px;
+      border: none;
+      background-color: #d6336c;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .pagination-container button:disabled {
+      background-color: #aaa;
+      cursor: default;
+    }
+
+    .pagination-container select {
+      padding: 8px 15px;
+      border: none;
+      background-color: #ffccda;
+      color: #333;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .pagination-container button:hover:not(:disabled) {
+      background-color: #c92121;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .social-icons {
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 10px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: #c92121;
+      transform: translateY(-3px);
+    }
+
+    .footer-links {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffdddd;
+      text-decoration: underline;
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .highlighted-product {
+      animation: highlight 2s ease-in-out;
+      box-shadow: 0 0 0 4px #d6336c;
+      position: relative;
+      padding-top: 20px;
+      margin-top: -20px;
+    }
+
+    .highlighted-product::before {
+      content: "";
+      display: block;
+      height: 70px;
+      margin-top: -70px;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .highlighted-product::after {
+      content: "★";
+      position: absolute;
+      top: 10px;
+      right: -10px;
+      background: #d6336c;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      z-index: 10;
+    }
+
+    @keyframes highlight {
+      0% { box-shadow: 0 0 0 4px #d6336c; }
+      50% { box-shadow: 0 0 0 8px rgba(214, 51, 108, 0.5); }
+      100% { box-shadow: 0 0 0 4px #d6336c; }
+    }
+
+    @media (max-width: 767.98px) {
+      .highlighted-product {
+        padding-top: 15px;
+        margin-top: -15px;
+      }
+      
+      .highlighted-product::before {
+        height: 60px;
+        margin-top: -60px;
+      }
+      
+      .highlighted-product::after {
+        top: 5px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+      }
+    }
+
+    .product-col {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="subproduct-header">
+    <div class="header-content">
+      <div class="back-btn-container">
+        <a href="products.html" class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      </div>
+      
+      <div class="logo-container">
+        <a href="index.html">
+          <img src="images/PommeLogo-removebg-preview1 (1).png" alt="My Mom's Shop" class="logo-img">
+        </a>
+      </div>
+      
+      <div class="spacer"></div>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <h2 class="mb-4 text-center" data-key="bags-collection">Bags & Purses Collection</h2>
+    <div class="row g-4" id="product-grid"></div>
+
+    <div class="pagination-container">
+      <button id="backBtn" class="btn" data-key="all-categories">
+        <i class="fas fa-arrow-left me-1"></i> All Categories
+      </button>
+      <button id="prevBtn" data-key="previous">Previous</button>
+      <select id="pageSelect"></select>
+      <span id="pageStatus">1/1</span>
+      <button id="nextBtn" data-key="next">Next</button>
+      <button id="firstBtn" class="btn-danger" style="display: none;" data-key="first-page">First Page</button>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p data-key="footer-copy">&copy; 2025 My Mom's Clothing Shop | Designed by Dariel</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="contact.html" data-key="footer-contact">Contact</a>
+        <a href="privacy.html" data-key="privacy">Privacy Policy</a>
+        <a href="terms.html" data-key="terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      { id: 1, name: "Classic Leather Tote", alName: "Tote Lëkure Klasike", price: 5200, image: "images/imazh prov.jpeg", description: "Timeless leather tote bag with perfect structure", alDescription: "Tote me lëkurë klasike me strukturë perfekte" },
+      { id: 2, name: "Crossbody Bag", alName: "Çantë Kryq", price: 4800, image: "images/bags/crossbody.jpg", description: "Convenient crossbody bag for everyday use", alDescription: "Çantë e përshtatshme kryq për përdorim të përditshëm" },
+      { id: 3, name: "Evening Clutch", alName: "Clutch Mbrëmje", price: 4500, image: "images/bags/evening_clutch.jpg", description: "Elegant evening clutch with metallic details", alDescription: "Clutch elegante mbrëmje me detaje metalike" },
+      { id: 4, name: "Backpack Purse", alName: "Çantë Shpine", price: 4900, image: "images/bags/backpack.jpg", description: "Stylish backpack that converts to purse", alDescription: "Çantë shpine elegante që shndërrohet në çantë dore" },
+      { id: 5, name: "Satchel Bag", alName: "Çantë Satchel", price: 5400, image: "images/bags/satchel.jpg", description: "Classic satchel with multiple compartments", alDescription: "Satchel klasik me shumë ndarje" },
+      { id: 6, name: "Hobo Bag", alName: "Çantë Hobo", price: 4700, image: "images/bags/hobo.jpg", description: "Casual slouchy hobo bag", alDescription: "Çantë e rehatshme hobo" },
+      { id: 7, name: "Wristlet Wallet", alName: "Portofol me Rrip", price: 3800, image: "images/bags/wristlet.jpg", description: "Compact wallet with wrist strap", alDescription: "Portofol kompakt me rrip për dore" },
+      { id: 8, name: "Bucket Bag", alName: "Çantë Kovë", price: 5100, image: "images/bags/bucket.jpg", description: "Trendy bucket bag with drawstring closure", alDescription: "Çantë kovë moderne me mbyllje me rrip" },
+      { id: 9, name: "Quilted Shoulder Bag", alName: "Çantë Sup me Jastëk", price: 5600, image: "images/bags/quilted.jpg", description: "Luxurious quilted shoulder bag", alDescription: "Çantë sup me jastëk luksoze" },
+      { id: 10, name: "Straw Beach Bag", alName: "Çantë Plazhi me Kashtë", price: 4200, image: "images/bags/straw.jpg", description: "Summer straw beach tote", alDescription: "Çantë verore plazhi me kashtë" },
+      { id: 11, name: "Mini Backpack", alName: "Çantë Shpine Mini", price: 4400, image: "images/bags/mini_backpack.jpg", description: "Adorable mini backpack", alDescription: "Çantë shpine mini e lezetshme" },
+      { id: 12, name: "Belt Bag", alName: "Çantë Rripi", price: 3900, image: "images/bags/belt_bag.jpg", description: "Trendy belt bag (fanny pack)", alDescription: "Çantë moderne rripi (fanny pack)" },
+      { id: 13, name: "Embroidered Tote", alName: "Tote me Broderi", price: 5300, image: "images/bags/embroidered.jpg", description: "Beautiful embroidered tote bag", alDescription: "Tote e bukur me broderi" },
+      { id: 14, name: "Structured Top Handle", alName: "Çantë me Dore të Fortë", price: 5800, image: "images/bags/top_handle.jpg", description: "Elegant structured top handle bag", alDescription: "Çantë elegante me dore të sipërme të fortë" },
+      { id: 15, name: "Convertible Backpack", alName: "Çantë Shpine e Shndërrueshme", price: 5500, image: "images/bags/convertible.jpg", description: "Versatile convertible backpack/tote", alDescription: "Çantë shpine/tote e shndërrueshme" },
+      { id: 16, name: "Woven Shoulder Bag", alName: "Çantë Sup e Endur", price: 4900, image: "images/bags/woven.jpg", description: "Artisan woven shoulder bag", alDescription: "Çantë sup e endur me artizanat" },
+      { id: 17, name: "Metallic Clutch", alName: "Clutch Metalik", price: 4600, image: "images/bags/metallic.jpg", description: "Shiny metallic evening clutch", alDescription: "Clutch metalik me shkëlqim për mbrëmje" },
+      { id: 18, name: "Laptop Tote", alName: "Tote për Laptop", price: 6000, image: "images/bags/laptop.jpg", description: "Professional laptop tote with padding", alDescription: "Tote profesionist për laptop me mbushje" },
+      { id: 19, name: "Beaded Evening Bag", alName: "Çantë Mbrëmje me Rruaza", price: 5200, image: "images/bags/beaded.jpg", description: "Hand-beaded evening bag", alDescription: "Çantë mbrëmje me rruaza të punuara me dorë" },
+      { id: 20, name: "Canvas Crossbody", alName: "Çantë Kryq me Kanavacë", price: 4100, image: "images/bags/canvas.jpg", description: "Casual canvas crossbody bag", alDescription: "Çantë kryq me kanavacë për përdorim të përditshëm" },
+      { id: 21, name: "Leather Backpack", alName: "Çantë Shpine me Lëkurë", price: 6200, image: "images/bags/leather_backpack.jpg", description: "Premium leather backpack", alDescription: "Çantë shpine me lëkurë cilësore" },
+      { id: 22, name: "Chain Strap Shoulder Bag", alName: "Çantë Sup me Zinxhir", price: 5700, image: "images/bags/chain.jpg", description: "Chic shoulder bag with chain strap", alDescription: "Çantë sup elegante me zinxhir" },
+      { id: 23, name: "Color Block Tote", alName: "Tote me Ngjyra të Ndarura", price: 4900, image: "images/bags/color_block.jpg", description: "Modern color block tote", alDescription: "Tote moderne me ngjyra të ndara" },
+      { id: 24, name: "Vintage Inspired Purse", alName: "Portofol me Frymë Vintage", price: 5300, image: "images/bags/vintage.jpg", description: "Retro style vintage purse", alDescription: "Portofol me stil retro vintage" },
+      { id: 25, name: "Foldable Shopping Bag", alName: "Çantë Blerjesh e Palosshme", price: 3500, image: "images/bags/foldable.jpg", description: "Compact foldable shopping tote", alDescription: "Tote e palosshme kompakte për blerje" },
+      { id: 26, name: "Sling Bag", alName: "Çantë Sling", price: 4400, image: "images/bags/sling.jpg", description: "Modern sling bag across body", alDescription: "Çantë moderne sling nëpër trup" },
+      { id: 27, name: "Patchwork Shoulder Bag", alName: "Çantë Sup Patchwork", price: 5100, image: "images/bags/patchwork.jpg", description: "Unique patchwork design bag", alDescription: "Çantë sup me dizajn unik patchwork" },
+      { id: 28, name: "Drawstring Backpack", alName: "Çantë Shpine me Rrip Tërheqës", price: 4200, image: "images/bags/drawstring.jpg", description: "Casual drawstring backpack", alDescription: "Çantë shpine e përditshme me rrip tërheqës" },
+      { id: 29, name: "Geometric Print Tote", alName: "Tote me Print Gjeometrik", price: 4800, image: "images/bags/geometric.jpg", description: "Contemporary geometric print tote", alDescription: "Tote moderne me print gjeometrik" },
+      { id: 30, name: "Mini Circle Bag", alName: "Çantë Mini Rrethore", price: 3900, image: "images/bags/circle.jpg", description: "Trendy mini circular bag", alDescription: "Çantë mini rrethore moderne" },
+      { id: 31, name: "Raffia Tote", alName: "Tote Rafia", price: 4500, image: "images/bags/raffia.jpg", description: "Natural raffia summer tote", alDescription: "Tote verore me rafia natyrore" },
+      { id: 32, name: "Velvet Clutch", alName: "Clutch Kadife", price: 4700, image: "images/bags/velvet.jpg", description: "Luxurious velvet evening clutch", alDescription: "Clutch luksoze mbrëmje me kadife" },
+      { id: 33, name: "Denim Crossbody", alName: "Çantë Kryq Xhinse", price: 4300, image: "images/bags/denim.jpg", description: "Casual denim crossbody bag", alDescription: "Çantë kryq xhinse për përdorim të përditshëm" },
+      { id: 34, name: "Transparent PVC Tote", alName: "Tote PVC Transparente", price: 4100, image: "images/bags/pvc.jpg", description: "Modern transparent PVC tote", alDescription: "Tote moderne PVC transparente" },
+      { id: 35, name: "Bamboo Handle Bag", alName: "Çantë me Dore Bambu", price: 5400, image: "images/bags/bamboo.jpg", description: "Eco-friendly bamboo handle bag", alDescription: "Çantë miqësore me mjedis me dore bambu" },
+      { id: 36, name: "Embellished Shoulder Bag", alName: "Çantë Sup me Dekor", price: 5900, image: "images/bags/embellished.jpg", description: "Glamorous embellished shoulder bag", alDescription: "Çantë sup glamuroze me dekor" },
+      { id: 37, name: "Convertible Tote Backpack", alName: "Tote/Çantë Shpine e Shndërrueshme", price: 6100, image: "images/bags/tote_backpack.jpg", description: "2-in-1 tote and backpack", alDescription: "2-në-1 tote dhe çantë shpine" },
+      { id: 38, name: "Macramé Purse", alName: "Portofol Makrame", price: 5200, image: "images/bags/macrame.jpg", description: "Handmade macramé purse", alDescription: "Portofol makrame i punuar me dorë" },
+      { id: 39, name: "Waxed Canvas Messenger", alName: "Çantë Dërguesi me Kanavacë të Dylluar", price: 5800, image: "images/bags/waxed.jpg", description: "Durable waxed canvas messenger bag", alDescription: "Çantë dërguesi e qëndrueshme me kanavacë të dylluar" },
+      { id: 40, name: "Fringed Hobo", alName: "Hobo me Gërsheta", price: 5300, image: "images/bags/fringed.jpg", description: "Boho chic fringed hobo bag", alDescription: "Çantë hobo me gërsheta në stil boho" },
+      { id: 41, name: "Crocodile Embossed Clutch", alName: "Clutch me Reliev Krokodil", price: 6500, image: "images/bags/crocodile.jpg", description: "Luxury crocodile embossed clutch", alDescription: "Clutch luksoze me reliev krokodil" },
+      { id: 42, name: "Mini Square Bag", alName: "Çantë Mini Katror", price: 4200, image: "images/bags/square.jpg", description: "Trendy mini square shaped bag", alDescription: "Çantë mini moderne në formë katrore" },
+      { id: 43, name: "Tassel Shoulder Bag", alName: "Çantë Sup me Gërsheta", price: 5100, image: "images/bags/tassel.jpg", description: "Playful tassel detail shoulder bag", alDescription: "Çantë sup me detaje gërsheta" },
+      { id: 44, name: "Nylon Travel Tote", alName: "Tote Udhëtimi Nylon", price: 5500, image: "images/bags/nylon.jpg", description: "Lightweight nylon travel tote", alDescription: "Tote udhëtimi me nylon të lehtë" },
+      { id: 45, name: "Wicker Basket Bag", alName: "Çantë Shportë", price: 4700, image: "images/bags/wicker.jpg", description: "Summer wicker basket bag", alDescription: "Çantë verore shportë" },
+      { id: 46, name: "Quilted Chain Bag", alName: "Çantë me Jastëk dhe Zinxhir", price: 6200, image: "images/bags/quilted_chain.jpg", description: "Luxury quilted bag with chain strap", alDescription: "Çantë luksoze me jastëk dhe zinxhir" },
+      { id: 47, name: "Reversible Tote", alName: "Tote e Kthyeshme", price: 5400, image: "images/bags/reversible.jpg", description: "Two-in-one reversible tote bag", alDescription: "Tote 2-në-1 e kthyeshme" },
+      { id: 48, name: "Pearl Embellished Clutch", alName: "Clutch me Margaritar", price: 5800, image: "images/bags/pearl.jpg", description: "Elegant pearl embellished clutch", alDescription: "Clutch elegante me margaritar" },
+      { id: 49, name: "Oversized Shopper", alName: "Çantë Madhësi e Madhe", price: 5900, image: "images/bags/shopper.jpg", description: "Spacious oversized shopper tote", alDescription: "Tote madhësi e madhe me hapësirë të gjerë" },
+      { id: 50, name: "Custom Monogrammed Bag", alName: "Çantë e Personalizuar me Monogram", price: 6800, image: "images/bags/monogram.jpg", description: "Personalized monogrammed bag", alDescription: "Çantë e personalizuar me monogram" }
+    ];
+
+    const productsPerPage = 8;
+    let currentPage = 1;
+    const totalPages = Math.ceil(products.length / productsPerPage);
+
+    const productGrid = document.getElementById("product-grid");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const firstBtn = document.getElementById("firstBtn");
+    const backBtn = document.getElementById("backBtn");
+    const pageStatus = document.getElementById("pageStatus");
+    const pageSelect = document.getElementById("pageSelect");
+
+    function getUrlParams() {
+      const params = {};
+      const queryString = window.location.search.substring(1);
+      const pairs = queryString.split('&');
+      
+      pairs.forEach(pair => {
+        const [key, value] = pair.split('=');
+        if (key && value) {
+          params[key] = decodeURIComponent(value);
+        }
+      });
+      
+      return params;
+    }
+
+    function highlightProduct(productId) {
+      const productElement = document.getElementById(`product-${productId}`);
+      if (productElement) {
+        productElement.classList.add('highlighted-product');
+        
+        setTimeout(() => {
+          const headerHeight = document.querySelector('.subproduct-header').offsetHeight;
+          const elementPosition = productElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    }
+
+    const urlParams = getUrlParams();
+    const highlightProductId = urlParams.highlight;
+    const requestedPage = urlParams.page ? parseInt(urlParams.page) : 1;
+
+    if (requestedPage && !isNaN(requestedPage) && requestedPage >= 1 && requestedPage <= totalPages) {
+      currentPage = requestedPage;
+    }
+
+    function renderProducts(page) {
+      productGrid.innerHTML = "";
+      const start = (page - 1) * productsPerPage;
+      const end = Math.min(start + productsPerPage, products.length);
+      const lang = localStorage.getItem("language") || "en";
+
+      for (let i = start; i < end; i++) {
+        const prod = products[i];
+        const col = document.createElement("div");
+        col.className = "col-12 col-sm-6 col-md-4 col-lg-3 product-col";
+        col.id = `product-${prod.id}`;
+
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <img src="${prod.image}" alt="${lang === 'al' ? prod.alName : prod.name}" class="img-fluid" onerror="this.onerror=null;this.src='images/bags/default.jpg';" />
+          <div class="product-card-body">
+            <h3>${lang === 'al' ? prod.alName : prod.name}</h3>
+            <p data-key="bags-desc" data-index="${prod.id}">${lang === 'al' ? prod.alDescription : prod.description}</p>
+            <p class="price">${lang === 'al' ? 'Cmimi' : 'Price'}: ${prod.price} L</p>
+            <a href="contact.html" class="btn" data-key="order-cta">${lang === 'al' ? 'Kontaktoni për Porosi' : 'Contact to Order'}</a>
+          </div>
+        `;
+        col.appendChild(card);
+        productGrid.appendChild(col);
+      }
+
+      pageStatus.textContent = `${page}/${totalPages}`;
+      prevBtn.disabled = page === 1;
+      nextBtn.disabled = page === totalPages;
+      firstBtn.style.display = page === totalPages && totalPages > 1 ? "inline-block" : "none";
+
+      pageSelect.innerHTML = "";
+      for (let i = 1; i <= totalPages; i++) {
+        const opt = document.createElement("option");
+        opt.value = i;
+        opt.textContent = `${lang === 'al' ? 'Faqja' : 'Page'} ${i}`;
+        if (i === page) opt.selected = true;
+        pageSelect.appendChild(opt);
+      }
+
+      if (highlightProductId) {
+        setTimeout(() => {
+          highlightProduct(highlightProductId);
+        }, 100);
+      }
+
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('page', page);
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderProducts(currentPage);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderProducts(currentPage);
+      }
+    });
+
+    firstBtn.addEventListener("click", () => {
+      currentPage = 1;
+      renderProducts(currentPage);
+    });
+
+    pageSelect.addEventListener("change", (e) => {
+      currentPage = parseInt(e.target.value);
+      renderProducts(currentPage);
+    });
+
+    backBtn.addEventListener("click", () => {
+      window.location.href = "products.html";
+    });
+
+    renderProducts(currentPage);
+  </script>
+  <script src="js/lang.js"></script>
+</body>
+</html>

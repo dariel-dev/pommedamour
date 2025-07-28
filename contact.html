@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title data-key="contact-title">Contact Us - My Mom's Clothing Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    :root {
+      --primary-color: #c92121;
+      --primary-dark: #9e1a1a;
+      --text-dark: #333;
+      --text-light: #777;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-dark);
+      background-color: #fff;
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    
+    .logo-img {
+      display: block;
+      margin: 0 auto;
+      max-width: 150px;
+      height: auto;
+      margin-bottom: 1.5rem;
+    }
+    
+    .motto-text {
+      text-align: center;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: white;
+      border-bottom: 1.5px solid white;
+      padding-bottom: 0.001rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .navbar {
+      background-color: var(--primary-color);
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    
+    .navbar-nav {
+      justify-content: center;
+    }
+    
+    .navbar-nav .nav-link {
+      color: white;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+    }
+    
+    .navbar-nav .nav-link:hover {
+      text-decoration: underline;
+      color: #ffdddd;
+    }
+    
+    .contact-section {
+      padding: 5rem 0;
+      background-color: #f9f9f9;
+    }
+    
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 3rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .contact-info {
+      margin-bottom: 2rem;
+    }
+    
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-right: 1.5rem;
+      width: 40px;
+      height: 40px;
+      background: rgba(201, 33, 33, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .contact-details h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-dark);
+    }
+    
+    .contact-details p, 
+    .contact-details a {
+      color: var(--text-light);
+      margin-bottom: 0;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-details a:hover {
+      color: var(--primary-color);
+    }
+    
+    .btn-whatsapp {
+      background-color: #25D366;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-whatsapp:hover {
+      background-color: #128C7E;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .btn-whatsapp i {
+      margin-right: 0.5rem;
+    }
+    
+    .map-container {
+      margin-top: 3rem;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+    
+    footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+    }
+    
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .social-icons {
+      margin: 1.5rem 0;
+    }
+    
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 10px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background: var(--primary-color);
+      transform: translateY(-3px);
+    }
+    
+    .footer-links {
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #ffdddd;
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 767.98px) {
+      .contact-container {
+        padding: 2rem;
+      }
+      
+      .map-container iframe {
+        height: 300px;
+      }
+    }
+    
+    @media (max-width: 575.98px) {
+      .contact-container {
+        padding: 1.5rem;
+      }
+      
+      .map-container iframe {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container d-flex flex-column align-items-center">
+        <!-- Logo -->
+        <a href="index.html">
+          <img src="images/PommeLogo-removebg-preview1 (1).png" alt="Logo" class="logo-img" />
+        </a>
+
+        <!-- Motto below logo -->
+        <div class="motto-text" data-key="unlogical-poem">Unlogical poem of styling</div>
+
+        <!-- Navigation menu below motto -->
+        <div class="nav-scroll-container w-100">
+          <ul class="navbar-nav d-flex flex-row justify-content-center gap-3 mb-0">
+            <li class="nav-item"><a class="nav-link" href="index.html" data-key="home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="products.html" data-key="products">Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html" data-key="about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html" data-key="contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="contact-section">
+    <div class="contact-container">
+      <h2 data-key="contact-title" class="mb-4 text-center">Contact Us</h2>
+      
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="contact-details">
+            <h3 data-key="address-title">Address</h3>
+            <p data-key="address">Rruga e Dibrës, Tirana, Albania</p>
+          </div>
+        </div>
+        
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="contact-details">
+            <h3 data-key="phone-title">Phone</h3>
+            <p><a href="tel:+355681234567" data-key="phone">+355 68 123 4567</a></p>
+          </div>
+        </div>
+        
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-details">
+            <h3 data-key="email-title">Email</h3>
+            <p><a href="mailto:mymomshop@gmail.com" data-key="email">mymomshop@gmail.com</a></p>
+          </div>
+        </div>
+        
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="contact-details">
+            <h3 data-key="whatsapp-title">WhatsApp</h3>
+            <a href="https://wa.me/355681234567" class="btn-whatsapp" target="_blank" data-key="whatsapp">
+              <i class="fab fa-whatsapp"></i> Message Us
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="map-container">
+        <h3 data-key="map-title" class="text-center mb-4">Find Us on the Map</h3>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.2307104439383!2d19.82622641541673!3d41.32754540673813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13503106b3b408e5%3A0xe7b7dc2df1819f87!2sRruga%20e%20Dibr%C3%ABs%2C%20Tiran%C3%AB!5e0!3m2!1sen!2s!4v1719150000000"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p data-key="footer-copy">&copy; 2025 My Mom's Clothing Shop | Designed by Dariel</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="contact.html" data-key="footer-contact">Contact</a>
+        <a href="privacy.html" data-key="privacy">Privacy Policy</a>
+        <a href="terms.html" data-key="terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/lang.js"></script>
+</body>
+</html>

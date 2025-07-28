@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Mom's Clothing Shop - Dropdown Menu</title>
+<style>
+  /* Reset & Base */
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+  nav {
+    background-color: #ffccda;
+    padding: 15px 0;
+  }
+
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  nav ul li {
+    position: relative; /* needed for absolute submenu */
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: #222;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 8px 12px;
+    display: inline-block;
+    user-select: none;
+  }
+
+  /* Highlight parent link on hover */
+  nav ul li.dropdown:hover > a {
+    color: #d6336c;
+  }
+
+  /* Dropdown menu - initially hidden */
+  nav ul li.dropdown ul.dropdown-menu {
+    position: absolute;
+    top: calc(100% - 3px); /* slight overlap to prevent flicker */
+    left: 0;
+    background-color: #ffccda;
+    padding: 10px 0;
+    border-radius: 0 0 8px 8px;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+  }
+
+  /* Show dropdown on hover */
+  nav ul li.dropdown:hover ul.dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Dropdown menu items */
+  nav ul li.dropdown ul.dropdown-menu li {
+    margin: 0;
+    padding: 0;
+  }
+
+  nav ul li.dropdown ul.dropdown-menu li a {
+    padding: 8px 20px;
+    font-weight: normal;
+    color: #333;
+    display: block;
+  }
+
+  /* Hover effect on submenu items */
+  nav ul li.dropdown ul.dropdown-menu li a:hover {
+    background-color: #d6336c;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="products.html">Products ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="products-skirts.html">Skirts</a></li>
+        <li><a href="products-jeans.html">Jeans</a></li>
+        <li><a href="products-jackets.html">Jackets</a></li>
+      </ul>
+    </li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+</body>
+</html>

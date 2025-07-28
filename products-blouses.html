@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Blouses Collection - My Mom's Clothing Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      padding-top: 70px;
+    }
+
+    .subproduct-header {
+      background-color: #c92121;
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s;
+      width: 40px;
+      justify-content: center;
+    }
+
+    .back-btn:hover {
+      opacity: 0.8;
+      color: white;
+    }
+
+    @media (max-width: 767.98px) {
+      .header-content {
+        display: grid;
+        grid-template-columns: 40px 1fr 40px;
+        align-items: center;
+        padding: 0 1rem;
+      }
+      
+      .logo-container {
+        grid-column: 2;
+        display: flex;
+        justify-content: center;
+      }
+      
+      .back-btn-container {
+        grid-column: 1;
+      }
+      
+      .spacer {
+        grid-column: 3;
+        width: 40px;
+      }
+    }
+
+    .product-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 1.5rem;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 991.98px) {
+      .product-card img {
+        height: 380px;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .product-card img {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .product-card img {
+        height: 450px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .product-card img {
+        height: 400px;
+      }
+    }
+
+    .product-card-body {
+      padding: 1rem;
+    }
+
+    .product-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card .price {
+      color: #d6336c;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .product-card .btn {
+      display: block;
+      background-color: #c92121;
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .product-card .btn:hover {
+      background-color: #a81b1b;
+    }
+
+    .pagination-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 30px 0;
+      align-items: center;
+    }
+
+    .pagination-container button {
+      padding: 8px 15px;
+      border: none;
+      background-color: #d6336c;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .pagination-container button:disabled {
+      background-color: #aaa;
+      cursor: default;
+    }
+
+    .pagination-container select {
+      padding: 8px 15px;
+      border: none;
+      background-color: #ffccda;
+      color: #333;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .pagination-container button:hover:not(:disabled) {
+      background-color: #c92121;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .social-icons {
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 10px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: #c92121;
+      transform: translateY(-3px);
+    }
+
+    .footer-links {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffdddd;
+      text-decoration: underline;
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .highlighted-product {
+      animation: highlight 2s ease-in-out;
+      box-shadow: 0 0 0 4px #d6336c;
+      position: relative;
+      padding-top: 20px;
+      margin-top: -20px;
+    }
+
+    .highlighted-product::before {
+      content: "";
+      display: block;
+      height: 70px;
+      margin-top: -70px;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .highlighted-product::after {
+      content: "★";
+      position: absolute;
+      top: 10px;
+      right: -10px;
+      background: #d6336c;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      z-index: 10;
+    }
+
+    @keyframes highlight {
+      0% { box-shadow: 0 0 0 4px #d6336c; }
+      50% { box-shadow: 0 0 0 8px rgba(214, 51, 108, 0.5); }
+      100% { box-shadow: 0 0 0 4px #d6336c; }
+    }
+
+    @media (max-width: 767.98px) {
+      .highlighted-product {
+        padding-top: 15px;
+        margin-top: -15px;
+      }
+      
+      .highlighted-product::before {
+        height: 60px;
+        margin-top: -60px;
+      }
+      
+      .highlighted-product::after {
+        top: 5px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+      }
+    }
+
+    .product-col {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="subproduct-header">
+    <div class="header-content">
+      <div class="back-btn-container">
+        <a href="products.html" class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      </div>
+      
+      <div class="logo-container">
+        <a href="index.html">
+          <img src="images/PommeLogo-removebg-preview1 (1).png" alt="My Mom's Shop" class="logo-img">
+        </a>
+      </div>
+      
+      <div class="spacer"></div>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <h2 class="mb-4 text-center" data-key="blouses-collection">Blouses Collection</h2>
+    <div class="row g-4" id="product-grid"></div>
+
+    <div class="pagination-container">
+      <button id="backBtn" class="btn" data-key="all-categories">
+        <i class="fas fa-arrow-left me-1"></i> All Categories
+      </button>
+      <button id="prevBtn" data-key="previous">Previous</button>
+      <select id="pageSelect"></select>
+      <span id="pageStatus">1/1</span>
+      <button id="nextBtn" data-key="next">Next</button>
+      <button id="firstBtn" class="btn-danger" style="display: none;" data-key="first-page">First Page</button>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p data-key="footer-copy">&copy; 2025 My Mom's Clothing Shop | Designed by Dariel</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="contact.html" data-key="footer-contact">Contact</a>
+        <a href="privacy.html" data-key="privacy">Privacy Policy</a>
+        <a href="terms.html" data-key="terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      { id: 1, name: "Silk Button-Down Blouse", alName: "Bluzë Mëndafshi me Kopsa", price: 5200, image: "images/imazh prov.jpeg", description: "Luxurious silk blouse with button-down front", alDescription: "Bluzë luksoze me mëndafsh me kopsa përpara" },
+      { id: 2, name: "Lace Trim Blouse", alName: "Bluzë me Dekor Dantelle", price: 4800, image: "images/blouses/lace_trim.jpg", description: "Elegant blouse with delicate lace trim", alDescription: "Bluzë elegante me dekor delikat dantelle" },
+      { id: 3, name: "Ruffled Sleeve Blouse", alName: "Bluzë me Mëngë të Rrudhosura", price: 4500, image: "images/blouses/ruffled_sleeve.jpg", description: "Feminine blouse with ruffled sleeve details", alDescription: "Bluzë femërore me detaje të rrudhosura në mëngë" },
+      { id: 4, name: "Wrap Front Blouse", alName: "Bluzë me Mbështjellës Përpara", price: 4900, image: "images/blouses/wrap_front.jpg", description: "Flattering wrap style blouse with tie closure", alDescription: "Bluzë stil mbështjellës me mbyllje me lidhje" },
+      { id: 5, name: "Puffed Sleeve Blouse", alName: "Bluzë me Mëngë të Fryra", price: 5400, image: "images/blouses/puffed_sleeve.jpg", description: "Romantic blouse with dramatic puffed sleeves", alDescription: "Bluzë romantike me mëngë dramatike të fryra" },
+      { id: 6, name: "Off-Shoulder Blouse", alName: "Bluzë Pa Sup", price: 4700, image: "images/blouses/off_shoulder.jpg", description: "Chic off-shoulder blouse with elastic trim", alDescription: "Bluzë elegante pa sup me buzë elastike" },
+      { id: 7, name: "High Neck Blouse", alName: "Bluzë me Qafë të Lartë", price: 3800, image: "images/blouses/high_neck.jpg", description: "Sophisticated high neck blouse", alDescription: "Bluzë sofistikuar me qafë të lartë" },
+      { id: 8, name: "Peplum Blouse", alName: "Bluzë Peplum", price: 5100, image: "images/blouses/peplum.jpg", description: "Feminine peplum style blouse", alDescription: "Bluzë femërore stil peplum" },
+      { id: 9, name: "Chiffon Bow Blouse", alName: "Bluzë me Fjongo Chiffon", price: 5600, image: "images/blouses/chiffon_bow.jpg", description: "Elegant chiffon blouse with bow detail", alDescription: "Bluzë elegante me chiffon dhe detaj fjongo" },
+      { id: 10, name: "Boho Print Blouse", alName: "Bluzë me Print Boho", price: 4200, image: "images/blouses/boho_print.jpg", description: "Colorful boho print blouse", alDescription: "Bluzë me ngjyra me print boho" },
+      { id: 11, name: "Cold Shoulder Blouse", alName: "Bluzë me Sup të Hapur", price: 4400, image: "images/blouses/cold_shoulder.jpg", description: "Trendy cold shoulder blouse", alDescription: "Bluzë moderne me sup të hapur" },
+      { id: 12, name: "Tie-Neck Blouse", alName: "Bluzë me Qafë Lidhëse", price: 3900, image: "images/blouses/tie_neck.jpg", description: "Classic tie-neck blouse", alDescription: "Bluzë klasike me qafë lidhëse" },
+      { id: 13, name: "Embroidered Blouse", alName: "Bluzë me Broderi", price: 5300, image: "images/blouses/embroidered.jpg", description: "Hand-embroidered blouse with floral details", alDescription: "Bluzë me broderi me dorë me detaje florale" },
+      { id: 14, name: "Satin Blouse", alName: "Bluzë Satin", price: 5800, image: "images/blouses/satin.jpg", description: "Luxurious satin blouse with pearl buttons", alDescription: "Bluzë luksoze me satin dhe kopsa margaritar" },
+      { id: 15, name: "Sheer Panel Blouse", alName: "Bluzë me Panele Transparente", price: 5500, image: "images/blouses/sheer_panel.jpg", description: "Modern blouse with sheer panel details", alDescription: "Bluzë moderne me panele transparente" },
+      { id: 16, name: "Tunic Blouse", alName: "Bluzë Tunikë", price: 4900, image: "images/blouses/tunic.jpg", description: "Comfortable tunic style blouse", alDescription: "Bluzë e rehatshme stil tunikë" },
+      { id: 17, name: "Vintage Floral Blouse", alName: "Bluzë Vintage me Lule", price: 4600, image: "images/blouses/vintage_floral.jpg", description: "Retro inspired floral print blouse", alDescription: "Bluzë me frymë retro me print lulesh" },
+      { id: 18, name: "Long Sleeve Blouse", alName: "Bluzë me Mëngë të Gjata", price: 6000, image: "images/blouses/long_sleeve.jpg", description: "Elegant long sleeve blouse", alDescription: "Bluzë elegante me mëngë të gjata" },
+      { id: 19, name: "Belted Blouse", alName: "Bluzë me Rrip", price: 5200, image: "images/blouses/belted.jpg", description: "Stylish blouse with self-tie belt", alDescription: "Bluzë elegante me rrip vetëlidhës" },
+      { id: 20, name: "Denim Blouse", alName: "Bluzë Xhinse", price: 4100, image: "images/blouses/denim.jpg", description: "Casual denim blouse", alDescription: "Bluzë e përditshme xhinse" },
+      { id: 21, name: "Chiffon Blouse", alName: "Bluzë Chiffon", price: 6200, image: "images/blouses/chiffon.jpg", description: "Lightweight chiffon blouse", alDescription: "Bluzë e lehtë me chiffon" },
+      { id: 22, name: "Puff Sleeve Blouse", alName: "Bluzë me Mëngë të Fryra", price: 5700, image: "images/blouses/puff_sleeve.jpg", description: "Romantic puff sleeve blouse", alDescription: "Bluzë romantike me mëngë të fryra" },
+      { id: 23, name: "Geometric Print Blouse", alName: "Bluzë me Print Gjeometrik", price: 4900, image: "images/blouses/geometric.jpg", description: "Modern geometric print blouse", alDescription: "Bluzë moderne me print gjeometrik" },
+      { id: 24, name: "Tie-Waist Blouse", alName: "Bluzë me Lidhje në Bel", price: 5300, image: "images/blouses/tie_waist.jpg", description: "Flattering tie-waist blouse", alDescription: "Bluzë me lidhje në bel" },
+      { id: 25, name: "Crop Top Blouse", alName: "Bluzë e Shkurtër", price: 3500, image: "images/blouses/crop_top.jpg", description: "Trendy crop top style blouse", alDescription: "Bluzë moderne stil crop top" },
+      { id: 26, name: "Boat Neck Blouse", alName: "Bluzë me Qafë Varkë", price: 4400, image: "images/blouses/boat_neck.jpg", description: "Classic boat neck blouse", alDescription: "Bluzë klasike me qafë varkë" },
+      { id: 27, name: "Patchwork Blouse", alName: "Bluzë Patchwork", price: 5100, image: "images/blouses/patchwork.jpg", description: "Unique patchwork design blouse", alDescription: "Bluzë me dizajn unik patchwork" },
+      { id: 28, name: "Tie-Front Blouse", alName: "Bluzë me Lidhje Përpara", price: 4200, image: "images/blouses/tie_front.jpg", description: "Feminine tie-front blouse", alDescription: "Bluzë femërore me lidhje përpara" },
+      { id: 29, name: "Linen Blouse", alName: "Bluzë Liri", price: 4800, image: "images/blouses/linen.jpg", description: "Breathable linen blouse", alDescription: "Bluzë me liri që lejon frymëmarrje" },
+      { id: 30, name: "Belted Wrap Blouse", alName: "Bluzë me Rrip dhe Mbështjellës", price: 3900, image: "images/blouses/belted_wrap.jpg", description: "Flattering belted wrap blouse", alDescription: "Bluzë me rrip dhe stil mbështjellës" },
+      { id: 31, name: "Ruffle Front Blouse", alName: "Bluzë me Rrudha Përpara", price: 4500, image: "images/blouses/ruffle_front.jpg", description: "Feminine ruffle front blouse", alDescription: "Bluzë femërore me rrudha përpara" },
+      { id: 32, name: "Velvet Blouse", alName: "Bluzë Kadife", price: 4700, image: "images/blouses/velvet.jpg", description: "Luxurious velvet blouse", alDescription: "Bluzë luksoze me kadife" },
+      { id: 33, name: "Flutter Sleeve Blouse", alName: "Bluzë me Mëngë Fluturuese", price: 4300, image: "images/blouses/flutter_sleeve.jpg", description: "Romantic flutter sleeve blouse", alDescription: "Bluzë romantike me mëngë fluturuese" },
+      { id: 34, name: "Transparent Blouse", alName: "Bluzë Transparente", price: 4100, image: "images/blouses/transparent.jpg", description: "Sheer transparent blouse", alDescription: "Bluzë transparente" },
+      { id: 35, name: "Bamboo Button Blouse", alName: "Bluzë me Kopsa Bambu", price: 5400, image: "images/blouses/bamboo_button.jpg", description: "Eco-friendly blouse with bamboo buttons", alDescription: "Bluzë miqësore me mjedis me kopsa bambu" },
+      { id: 36, name: "Embellished Blouse", alName: "Bluzë me Dekor", price: 5900, image: "images/blouses/embellished.jpg", description: "Glamorous embellished blouse", alDescription: "Bluzë glamuroze me dekor" },
+      { id: 37, name: "Convertible Blouse", alName: "Bluzë e Shndërrueshme", price: 6100, image: "images/blouses/convertible.jpg", description: "Versatile convertible style blouse", alDescription: "Bluzë e shndërrueshme me stil të ndryshueshëm" },
+      { id: 38, name: "Macramé Blouse", alName: "Bluzë Makrame", price: 5200, image: "images/blouses/macrame.jpg", description: "Handmade macramé detail blouse", alDescription: "Bluzë me detaj makrame të punuar me dorë" },
+      { id: 39, name: "Waxed Cotton Blouse", alName: "Bluzë me Pambuk të Dylluar", price: 5800, image: "images/blouses/waxed_cotton.jpg", description: "Durable waxed cotton blouse", alDescription: "Bluzë e qëndrueshme me pambuk të dylluar" },
+      { id: 40, name: "Fringed Blouse", alName: "Bluzë me Gërsheta", price: 5300, image: "images/blouses/fringed.jpg", description: "Boho chic fringed blouse", alDescription: "Bluzë në stil boho me gërsheta" },
+      { id: 41, name: "Crocodile Print Blouse", alName: "Bluzë me Print Krokodil", price: 6500, image: "images/blouses/crocodile.jpg", description: "Luxury crocodile print blouse", alDescription: "Bluzë luksoze me print krokodil" },
+      { id: 42, name: "Square Neck Blouse", alName: "Bluzë me Qafë Katrore", price: 4200, image: "images/blouses/square_neck.jpg", description: "Trendy square neck blouse", alDescription: "Bluzë moderne me qafë katrore" },
+      { id: 43, name: "Tassel Detail Blouse", alName: "Bluzë me Detaje Gërsheta", price: 5100, image: "images/blouses/tassel.jpg", description: "Playful tassel detail blouse", alDescription: "Bluzë me detaje gërsheta" },
+      { id: 44, name: "Nylon Blouse", alName: "Bluzë Nylon", price: 5500, image: "images/blouses/nylon.jpg", description: "Lightweight nylon blouse", alDescription: "Bluzë e lehtë me nylon" },
+      { id: 45, name: "Wicker Print Blouse", alName: "Bluzë me Print Shportë", price: 4700, image: "images/blouses/wicker.jpg", description: "Summer wicker print blouse", alDescription: "Bluzë verore me print shportë" },
+      { id: 46, name: "Quilted Blouse", alName: "Bluzë me Jastëk", price: 6200, image: "images/blouses/quilted.jpg", description: "Luxury quilted detail blouse", alDescription: "Bluzë luksoze me detaj jastëk" },
+      { id: 47, name: "Reversible Blouse", alName: "Bluzë e Kthyeshme", price: 5400, image: "images/blouses/reversible.jpg", description: "Two-in-one reversible blouse", alDescription: "Bluzë 2-në-1 e kthyeshme" },
+      { id: 48, name: "Pearl Button Blouse", alName: "Bluzë me Kopsa Margaritar", price: 5800, image: "images/blouses/pearl_button.jpg", description: "Elegant pearl button blouse", alDescription: "Bluzë elegante me kopsa margaritar" },
+      { id: 49, name: "Oversized Blouse", alName: "Bluzë e Madhe", price: 5900, image: "images/blouses/oversized.jpg", description: "Comfortable oversized blouse", alDescription: "Bluzë e rehatshme e madhe" },
+      { id: 50, name: "Custom Monogram Blouse", alName: "Bluzë e Personalizuar me Monogram", price: 6800, image: "images/blouses/monogram.jpg", description: "Personalized monogrammed blouse", alDescription: "Bluzë e personalizuar me monogram" }
+    ];
+
+    const productsPerPage = 8;
+    let currentPage = 1;
+    const totalPages = Math.ceil(products.length / productsPerPage);
+
+    const productGrid = document.getElementById("product-grid");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const firstBtn = document.getElementById("firstBtn");
+    const backBtn = document.getElementById("backBtn");
+    const pageStatus = document.getElementById("pageStatus");
+    const pageSelect = document.getElementById("pageSelect");
+
+    function getUrlParams() {
+      const params = {};
+      const queryString = window.location.search.substring(1);
+      const pairs = queryString.split('&');
+      
+      pairs.forEach(pair => {
+        const [key, value] = pair.split('=');
+        if (key && value) {
+          params[key] = decodeURIComponent(value);
+        }
+      });
+      
+      return params;
+    }
+
+    function highlightProduct(productId) {
+      const productElement = document.getElementById(`product-${productId}`);
+      if (productElement) {
+        productElement.classList.add('highlighted-product');
+        
+        setTimeout(() => {
+          const headerHeight = document.querySelector('.subproduct-header').offsetHeight;
+          const elementPosition = productElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    }
+
+    const urlParams = getUrlParams();
+    const highlightProductId = urlParams.highlight;
+    const requestedPage = urlParams.page ? parseInt(urlParams.page) : 1;
+
+    if (requestedPage && !isNaN(requestedPage) && requestedPage >= 1 && requestedPage <= totalPages) {
+      currentPage = requestedPage;
+    }
+
+    function renderProducts(page) {
+      productGrid.innerHTML = "";
+      const start = (page - 1) * productsPerPage;
+      const end = Math.min(start + productsPerPage, products.length);
+      const lang = localStorage.getItem("language") || "en";
+
+      for (let i = start; i < end; i++) {
+        const prod = products[i];
+        const col = document.createElement("div");
+        col.className = "col-12 col-sm-6 col-md-4 col-lg-3 product-col";
+        col.id = `product-${prod.id}`;
+
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <img src="${prod.image}" alt="${lang === 'al' ? prod.alName : prod.name}" class="img-fluid" onerror="this.onerror=null;this.src='images/blouses/default.jpg';" />
+          <div class="product-card-body">
+            <h3>${lang === 'al' ? prod.alName : prod.name}</h3>
+            <p data-key="blouses-desc" data-index="${prod.id}">${lang === 'al' ? prod.alDescription : prod.description}</p>
+            <p class="price">${lang === 'al' ? 'Cmimi' : 'Price'}: ${prod.price} L</p>
+            <a href="contact.html" class="btn" data-key="order-cta">${lang === 'al' ? 'Kontaktoni për Porosi' : 'Contact to Order'}</a>
+          </div>
+        `;
+        col.appendChild(card);
+        productGrid.appendChild(col);
+      }
+
+      pageStatus.textContent = `${page}/${totalPages}`;
+      prevBtn.disabled = page === 1;
+      nextBtn.disabled = page === totalPages;
+      firstBtn.style.display = page === totalPages && totalPages > 1 ? "inline-block" : "none";
+
+      pageSelect.innerHTML = "";
+      for (let i = 1; i <= totalPages; i++) {
+        const opt = document.createElement("option");
+        opt.value = i;
+        opt.textContent = `${lang === 'al' ? 'Faqja' : 'Page'} ${i}`;
+        if (i === page) opt.selected = true;
+        pageSelect.appendChild(opt);
+      }
+
+      if (highlightProductId) {
+        setTimeout(() => {
+          highlightProduct(highlightProductId);
+        }, 100);
+      }
+
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('page', page);
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderProducts(currentPage);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderProducts(currentPage);
+      }
+    });
+
+    firstBtn.addEventListener("click", () => {
+      currentPage = 1;
+      renderProducts(currentPage);
+    });
+
+    pageSelect.addEventListener("change", (e) => {
+      currentPage = parseInt(e.target.value);
+      renderProducts(currentPage);
+    });
+
+    backBtn.addEventListener("click", () => {
+      window.location.href = "products.html";
+    });
+
+    renderProducts(currentPage);
+  </script>
+  <script src="js/lang.js"></script>
+</body>
+</html>

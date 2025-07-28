@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Us | My Mom's Clothing Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Font (Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    :root {
+      --primary-color: #c92121;
+      --secondary-color: #f8f9fa;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--secondary-color);
+      line-height: 1.6;
+    }
+
+    .logo-img {
+      display: block;
+      margin: 0 auto;
+      max-width: 150px;
+      height: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    .motto-text {
+      text-align: center;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: white;
+      border-bottom: 1.5px solid white;
+      padding-bottom: 0.001rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .navbar {
+      background-color: var(--primary-color);
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      position: relative;
+    }
+
+    /* Desktop Navigation */
+    @media (min-width: 992px) {
+      .nav-scroll-container {
+        width: 100%;
+        overflow: visible;
+      }
+      
+      .navbar-nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+      
+      .navbar-nav .nav-item {
+        display: inline-block;
+        float: none;
+      }
+    }
+
+    /* Mobile Navigation */
+    @media (max-width: 991.98px) {
+      .nav-scroll-container {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .nav-scroll-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .navbar-nav {
+        display: inline-flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        width: auto;
+        padding-bottom: 5px;
+      }
+    }
+
+    .navbar-nav .nav-link {
+      color: white;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+    }
+
+    .navbar-nav .nav-link:hover {
+      text-decoration: underline;
+      color: #ffdddd;
+    }
+
+    /* About Hero */
+    .about-hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/about-hero-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+      padding: 8rem 1rem;
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    .about-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .about-hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      max-width: 800px;
+      margin: 0 auto;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Section Styling */
+    .about-section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-weight: 600;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background: var(--primary-color);
+      bottom: -10px;
+      left: 0;
+    }
+
+    .img-container {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.5s ease;
+    }
+
+    .img-container:hover .about-img {
+      transform: scale(1.05);
+    }
+
+    .about-text p {
+      margin-bottom: 1.5rem;
+      color: #555;
+      font-size: 1.1rem;
+    }
+
+    /* Media Gallery Section */
+    .media-gallery {
+      padding: 3rem 0;
+      background-color: white;
+    }
+
+    .media-placeholder {
+      background-color: #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      height: 300px;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .video-placeholder {
+      background-color: #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      height: 300px;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .video-placeholder::before {
+      content: '\f144';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      font-size: 3rem;
+      color: var(--primary-color);
+      position: absolute;
+    }
+
+    /* Founder Section */
+    .founder-section {
+      background-color: white;
+      padding: 5rem 0;
+    }
+
+    .founder-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .founder-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .founder-img-container {
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .founder-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .founder-info {
+      padding: 2rem;
+    }
+
+    .founder-name {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .founder-title {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: #777;
+    }
+
+    .founder-bio p {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Timeline Section */
+    .timeline-section {
+      padding: 5rem 0;
+      background-color: var(--secondary-color);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--primary-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+      border-radius: 3px;
+    }
+
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -12px;
+      background-color: white;
+      border: 4px solid var(--primary-color);
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .left {
+      left: 0;
+      text-align: right;
+      padding-right: 70px;
+    }
+
+    .right {
+      left: 50%;
+      padding-left: 70px;
+    }
+
+    .right::after {
+      left: -12px;
+    }
+
+    .timeline-content {
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline-year {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Philosophy Section */
+    .philosophy-section {
+      padding: 5rem 0;
+      background-color: white;
+    }
+
+    .philosophy-item {
+      text-align: center;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .philosophy-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .philosophy-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    /* Testimonials */
+    .testimonials-section {
+      padding: 5rem 0;
+      background-color: var(--secondary-color);
+    }
+
+    .testimonial-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .social-icons {
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 10px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    .footer-links {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffdddd;
+      text-decoration: underline;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .timeline::after {
+        left: 31px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+        text-align: left;
+      }
+      
+      .timeline-item::after {
+        left: 18px;
+      }
+      
+      .left::after, 
+      .right::after {
+        left: 18px;
+      }
+      
+      .left, 
+      .right {
+        left: 0;
+        text-align: left;
+        padding-right: 25px;
+      }
+      
+      .founder-img-container {
+        height: 350px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .about-hero {
+        padding: 5rem 1rem;
+        background-attachment: scroll;
+      }
+      
+      .about-section,
+      .founder-section,
+      .timeline-section,
+      .philosophy-section,
+      .testimonials-section {
+        padding: 3rem 0;
+      }
+      
+      .navbar-nav {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .about-hero {
+        padding: 4rem 1rem;
+      }
+      
+      .founder-img-container {
+        height: 300px;
+      }
+      
+      .section-title {
+        font-size: 1.75rem;
+      }
+
+      .navbar-nav .nav-link {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container d-flex flex-column align-items-center">
+        <!-- Logo -->
+        <a href="index.html">
+          <img src="images/PommeLogo-removebg-preview1 (1).png" alt="Logo" class="logo-img" />
+        </a>
+
+        <!-- Motto below logo -->
+        <div class="motto-text" data-key="unlogical-poem">Unlogical poem of styling</div>
+
+        <!-- Navigation menu below motto -->
+        <div class="nav-scroll-container w-100">
+          <ul class="navbar-nav d-flex flex-row mb-0">
+            <li class="nav-item"><a class="nav-link" href="index.html" data-key="home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="products.html" data-key="products">Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html" data-key="about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html" data-key="contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="about-hero">
+    <div class="container">
+      <h1 data-key="about-hero-title">Our Story</h1>
+      <p data-key="about-hero-text">A journey of passion, craftsmanship, and timeless style</p>
+    </div>
+  </section>
+
+  <section class="about-section container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <div class="img-container">
+          <img src="images/about-1.jpg" alt="Our Beginnings" class="about-img" data-key="about-img-1">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h2 class="section-title" data-key="our-story-title">Our Beginnings</h2>
+        <div class="about-text">
+          <p data-key="our-story-text-1">My Mom's Clothing Shop was born from a simple dream in 2010 - to create beautiful, handmade clothing that celebrates traditional craftsmanship while embracing modern aesthetics. What started as a small sewing machine in a Tirana apartment has grown into a beloved boutique known for its unique style and quality.</p>
+          <p data-key="our-story-text-2">The early days were filled with challenges, but also with the joy of seeing our first customers fall in love with our creations. Each piece was (and still is) made with meticulous attention to detail, using high-quality fabrics and traditional techniques passed down through generations.</p>
+          <p data-key="our-story-text-3">As word spread about our distinctive designs and commitment to quality, we gradually expanded, moving to our first physical storefront in 2015. Today, we're proud to serve customers who appreciate the artistry behind handmade fashion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="media-gallery container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="media-placeholder">
+          <span data-key="media-text-1">Boutique Interior</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="media-placeholder">
+          <span data-key="media-text-2">Design Process</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="video-placeholder">
+          <span data-key="media-text-3">Shop Tour Video</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="founder-section">
+    <div class="container">
+      <h2 class="text-center section-title mb-5" data-key="meet-founder-title">Meet The Founder</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="founder-card">
+            <div class="founder-img-container">
+              <img src="images/founder.jpg" alt="Founder" class="founder-img" data-key="founder-img">
+            </div>
+            <div class="founder-info">
+              <h3 class="founder-name" data-key="founder-name">Elena</h3>
+              <p class="founder-title" data-key="founder-title">Designer & Creative Director</p>
+              <div class="founder-bio">
+                <p data-key="founder-bio-1">With over 25 years of experience in fashion design, Elena brings a wealth of knowledge and creativity to every collection. Her journey began as a young girl learning to sew from her grandmother, developing a deep appreciation for traditional Albanian textiles and techniques.</p>
+                <p data-key="founder-bio-2">After studying fashion design in Italy, Elena returned to Tirana with a vision to blend contemporary styles with Albania's rich sartorial heritage. Her designs reflect this unique fusion - modern silhouettes adorned with intricate embroidery and traditional motifs.</p>
+                <p data-key="founder-bio-3">"For me, clothing is more than fabric and thread - it's a way to carry forward our cultural identity while embracing the future," Elena says. This philosophy continues to guide every piece created at My Mom's Clothing Shop.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline-section">
+    <div class="container">
+      <h2 class="text-center section-title mb-5" data-key="timeline-title">Our Journey</h2>
+      <div class="timeline">
+        <div class="timeline-item left">
+          <div class="timeline-content">
+            <div class="timeline-year" data-key="year-1">2010</div>
+            <p data-key="timeline-text-1">Founded in a small apartment with just a sewing machine and big dreams. First collection launched with 10 unique designs.</p>
+          </div>
+        </div>
+        <div class="timeline-item right">
+          <div class="timeline-content">
+            <div class="timeline-year" data-key="year-2">2012</div>
+            <p data-key="timeline-text-2">First fashion show held in Tirana, gaining local recognition for innovative designs blending traditional and modern elements.</p>
+          </div>
+        </div>
+        <div class="timeline-item left">
+          <div class="timeline-content">
+            <div class="timeline-year" data-key="year-3">2015</div>
+            <p data-key="timeline-text-3">Opened our first boutique in the heart of Tirana, marking a major milestone in our growth.</p>
+          </div>
+        </div>
+        <div class="timeline-item right">
+          <div class="timeline-content">
+            <div class="timeline-year" data-key="year-4">2018</div>
+            <p data-key="timeline-text-4">Launched our e-commerce platform, making our collections accessible worldwide while maintaining artisanal quality.</p>
+          </div>
+        </div>
+        <div class="timeline-item left">
+          <div class="timeline-content">
+            <div class="timeline-year" data-key="year-5">2023</div>
+            <p data-key="timeline-text-5">Celebrated our 13th anniversary with a special collection honoring Albania's textile heritage, featured in Vogue Italia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy-section container">
+    <h2 class="text-center section-title mb-5" data-key="philosophy-title">Our Philosophy</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="philosophy-item">
+          <div class="philosophy-icon"><i class="fas fa-hands-helping"></i></div>
+          <h3 class="philosophy-title" data-key="philosophy-1-title">Craftsmanship</h3>
+          <p data-key="philosophy-1-text">We honor traditional techniques while innovating for modern wearability. Every stitch tells a story.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="philosophy-item">
+          <div class="philosophy-icon"><i class="fas fa-leaf"></i></div>
+          <h3 class="philosophy-title" data-key="philosophy-2-title">Sustainability</h3>
+          <p data-key="philosophy-2-text">We source materials responsibly and create timeless pieces meant to last for generations.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="philosophy-item">
+          <div class="philosophy-icon"><i class="fas fa-heart"></i></div>
+          <h3 class="philosophy-title" data-key="philosophy-3-title">Community</h3>
+          <p data-key="philosophy-3-text">We collaborate with local artisans and support emerging talent in Albania's fashion scene.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section container">
+    <h2 class="text-center section-title mb-5" data-key="testimonials-title">What Our Clients Say</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <p class="testimonial-text" data-key="testimonial-1">"The attention to detail in every piece is remarkable. I've been wearing Elena's designs for years and they only get better with time."</p>
+          <p class="testimonial-author" data-key="testimonial-author-1">- Ana, Longtime Client</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <p class="testimonial-text" data-key="testimonial-2">"These aren't just clothes—they're wearable art. Each piece reflects Albania's rich textile heritage in a contemporary way."</p>
+          <p class="testimonial-author" data-key="testimonial-author-2">- Besa, Fashion Editor</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <p class="testimonial-text" data-key="testimonial-3">"The quality surpasses anything I've found elsewhere. Knowing each piece is handmade with care makes them even more special."</p>
+          <p class="testimonial-author" data-key="testimonial-author-3">- Nora, International Client</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-content">
+      <p data-key="footer-copy">&copy; 2025 My Mom's Clothing Shop | Designed by Dariel</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="contact.html" data-key="footer-contact">Contact</a>
+        <a href="privacy.html" data-key="privacy">Privacy Policy</a>
+        <a href="terms.html" data-key="terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const translations = {
+      en: {
+        "home": "Home",
+        "products": "Products",
+        "about": "About",
+        "contact": "Contact",
+        "unlogical-poem": "Unlogical poem of styling",
+        "about-hero-title": "Our Story",
+        "about-hero-text": "A journey of passion, craftsmanship, and timeless style",
+        "our-story-title": "Our Beginnings",
+        "our-story-text-1": "My Mom's Clothing Shop was born from a simple dream in 2010 - to create beautiful, handmade clothing that celebrates traditional craftsmanship while embracing modern aesthetics. What started as a small sewing machine in a Tirana apartment has grown into a beloved boutique known for its unique style and quality.",
+        "our-story-text-2": "The early days were filled with challenges, but also with the joy of seeing our first customers fall in love with our creations. Each piece was (and still is) made with meticulous attention to detail, using high-quality fabrics and traditional techniques passed down through generations.",
+        "our-story-text-3": "As word spread about our distinctive designs and commitment to quality, we gradually expanded, moving to our first physical storefront in 2015. Today, we're proud to serve customers who appreciate the artistry behind handmade fashion.",
+        "media-text-1": "Boutique Interior",
+        "media-text-2": "Design Process",
+        "media-text-3": "Shop Tour Video",
+        "meet-founder-title": "Meet The Founder",
+        "founder-name": "Elena",
+        "founder-title": "Designer & Creative Director",
+        "founder-bio-1": "With over 25 years of experience in fashion design, Elena brings a wealth of knowledge and creativity to every collection. Her journey began as a young girl learning to sew from her grandmother, developing a deep appreciation for traditional Albanian textiles and techniques.",
+        "founder-bio-2": "After studying fashion design in Italy, Elena returned to Tirana with a vision to blend contemporary styles with Albania's rich sartorial heritage. Her designs reflect this unique fusion - modern silhouettes adorned with intricate embroidery and traditional motifs.",
+        "founder-bio-3": "\"For me, clothing is more than fabric and thread - it's a way to carry forward our cultural identity while embracing the future,\" Elena says. This philosophy continues to guide every piece created at My Mom's Clothing Shop.",
+        "timeline-title": "Our Journey",
+        "year-1": "2010",
+        "timeline-text-1": "Founded in a small apartment with just a sewing machine and big dreams. First collection launched with 10 unique designs.",
+        "year-2": "2012",
+        "timeline-text-2": "First fashion show held in Tirana, gaining local recognition for innovative designs blending traditional and modern elements.",
+        "year-3": "2015",
+        "timeline-text-3": "Opened our first boutique in the heart of Tirana, marking a major milestone in our growth.",
+        "year-4": "2018",
+        "timeline-text-4": "Launched our e-commerce platform, making our collections accessible worldwide while maintaining artisanal quality.",
+        "year-5": "2023",
+        "timeline-text-5": "Celebrated our 13th anniversary with a special collection honoring Albania's textile heritage, featured in Vogue Italia.",
+        "philosophy-title": "Our Philosophy",
+        "philosophy-1-title": "Craftsmanship",
+        "philosophy-1-text": "We honor traditional techniques while innovating for modern wearability. Every stitch tells a story.",
+        "philosophy-2-title": "Sustainability",
+        "philosophy-2-text": "We source materials responsibly and create timeless pieces meant to last for generations.",
+        "philosophy-3-title": "Community",
+        "philosophy-3-text": "We collaborate with local artisans and support emerging talent in Albania's fashion scene.",
+        "testimonials-title": "What Our Clients Say",
+        "testimonial-1": "\"The attention to detail in every piece is remarkable. I've been wearing Elena's designs for years and they only get better with time.\"",
+        "testimonial-author-1": "- Ana, Longtime Client",
+        "testimonial-2": "\"These aren't just clothes—they're wearable art. Each piece reflects Albania's rich textile heritage in a contemporary way.\"",
+        "testimonial-author-2": "- Besa, Fashion Editor",
+        "testimonial-3": "\"The quality surpasses anything I've found elsewhere. Knowing each piece is handmade with care makes them even more special.\"",
+        "testimonial-author-3": "- Nora, International Client",
+        "footer-copy": "© 2025 My Mom's Clothing Shop | Designed by Dariel",
+        "footer-contact": "Contact",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+      },
+      al: {
+        "home": "Kreu",
+        "products": "Produkte",
+        "about": "Rreth Nesh",
+        "contact": "Kontakt",
+        "unlogical-poem": "Poemë e palogjikshme e stilit",
+        "about-hero-title": "Historia Jonë",
+        "about-hero-text": "Një udhëtim pasione, zejtari dhe stili të përjetshëm",
+        "our-story-title": "Fillimet Tona",
+        "our-story-text-1": "Dyqani i Veshjeve të Mamasë lindi nga një ëndërr e thjeshtë në vitin 2010 - për të krijuar veshje të bukura të punuara me dorë që festojnë zejtarinë tradicionale ndërsa përqafojnë estetikën moderne. Ajo që filloi si një makinë qepëse e vogël në një apartament në Tiranë është rritur në një butik të dashur të njohur për stilin dhe cilësinë e tij unike.",
+        "our-story-text-2": "Ditët e para ishin plot me sfida, por edhe me gëzimin e të parë të klientëve tanë të parë që dashuroheshin me krijimet tona. Çdo pjesë është bërë (dhe ende është) me kujdes të veçantë për detaje, duke përdorur pëlhura cilësore dhe teknika tradicionale të transmetuara brez pas brezi.",
+        "our-story-text-3": "Ndërsa fjala u përhap për dizajnet tona të veçanta dhe përkushtimin ndaj cilësisë, ne u zgjeruam gradualisht, duke u zhvendosur në dyqanin tonë të parë fizik në vitin 2015. Sot, jemi krenarë që u shërbejmë klientëve që vlerësojnë artin pas modës së punuar me dorë.",
+        "media-text-1": "Brendësia e Butikut",
+        "media-text-2": "Procesi i Dizajnit",
+        "media-text-3": "Video Turne e Dyqanit",
+        "meet-founder-title": "Takoni Themeluesen",
+        "founder-name": "Elena",
+        "founder-title": "Dizajnere & Drejtore Kreative",
+        "founder-bio-1": "Me më shumë se 25 vjet përvojë në dizajnim modë, Elena sjell një pasuri njohurish dhe kreativiteti në çdo koleksion. Udhëtimi i saj filloi si një vajzë e vogël që mësoi të qepë nga gjyshja, duke zhvilluar një vlerësim të thellë për tekstilet dhe teknikat tradicionale shqiptare.",
+        "founder-bio-2": "Pas studimeve në dizajnim modë në Itali, Elena u kthye në Tiranë me një vizion për të përzier stilet bashkëkohore me trashëgiminë e pasur të veshjeve shqiptare. Dizajnet e saj pasqyrojnë këtë përzierje unike - siluete moderne të zbukuruara me qëndisje të ndërlikuara dhe motive tradicionale.",
+        "founder-bio-3": "\"Për mua, veshjet janë më shumë se pëlhura dhe fije - janë një mënyrë për të mbajtur përpara identitetin tonë kulturor ndërsa përqafojmë të ardhmen,\" thotë Elena. Kjo filozofi vazhdon të udhëheqë çdo pjesë të krijuar në Dyqanin e Veshjeve të Mamasë.",
+        "timeline-title": "Udhëtimi Ynë",
+        "year-1": "2010",
+        "timeline-text-1": "Themeluar në një apartament të vogël me vetëm një makinë qepëse dhe ëndrra të mëdha. Koleksioni i parë i lansuar me 10 dizajne unike.",
+        "year-2": "2012",
+        "timeline-text-2": "Shfaqja e parë e modës në Tiranë, duke fituar njohje lokale për dizajne inovative që përzijnë elemente tradicionale dhe moderne.",
+        "year-3": "2015",
+        "timeline-text-3": "Hapëm dyqanin tonë të parë në zemër të Tiranës, duke shënuar një arritje të madhe në rritjen tonë.",
+        "year-4": "2018",
+        "timeline-text-4": "Lansuam platformën tonë e-commerce, duke i bërë koleksionet tona të arritshme në të gjithë botën duke ruajtur cilësinë artizanale.",
+        "year-5": "2023",
+        "timeline-text-5": "Festuam përvjetorin tonë të 13-të me një koleksion special që nderoi trashëgiminë tekstile të Shqipërisë, të prezantuar në Vogue Italia.",
+        "philosophy-title": "Filozofia Jonë",
+        "philosophy-1-title": "Zejtari",
+        "philosophy-1-text": "Ne nderojmë teknikat tradicionale ndërsa inovojmë për të qenë të veshura në mënyrë moderne. Çdo qepje tregon një histori.",
+        "philosophy-2-title": "Qëndrueshmëria",
+        "philosophy-2-text": "Ne përdorim materiale në mënyrë të përgjegjshme dhe krijojmë pjesë të përjetshme që synojnë të zgjasin brez pas brezi.",
+        "philosophy-3-title": "Komuniteti",
+        "philosophy-3-text": "Ne bashkëpunojmë me zejtarët lokalë dhe mbështesim talente të reja në skenën e modës shqiptare.",
+        "testimonials-title": "Çfarë Thonë Klientët Tanë",
+        "testimonial-1": "\"Vëmendja ndaj detajeve në çdo pjesë është e jashtëzakonshme. Unë kam veshur dizajnet e Elenës për vite dhe ato vetëm përmirësohen me kalimin e kohës.\"",
+        "testimonial-author-1": "- Ana, Klente e Gjatë",
+        "testimonial-2": "\"Këto nuk janë thjesht veshje—janë art i veshshëm. Çdo pjesë pasqyron trashëgiminë e pasur tekstile të Shqipërisë në një mënyrë bashkëkohore.\"",
+        "testimonial-author-2": "- Besa, Editor Modë",
+        "testimonial-3": "\"Cilësia tejkalon çdo gjë tjetër që kam gjetur. Të dish që çdo pjesë është e punuar me dorë me kujdes i bën ato edhe më të veçanta.\"",
+        "testimonial-author-3": "- Nora, Klente Ndërkombëtare",
+        "footer-copy": "© 2025 Dyqani i Veshjeve të Mamasë | Dizajnuar nga Dariel",
+        "footer-contact": "Kontakt",
+        "privacy": "Politika e Privatësisë",
+        "terms": "Kushtet e Shërbimit"
+      }
+    };
+
+    const translatableElements = document.querySelectorAll("[data-key]");
+    const savedLang = localStorage.getItem("language") || "en";
+    
+    function setLanguage(lang) {
+      translatableElements.forEach(el => {
+        const key = el.getAttribute("data-key");
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      localStorage.setItem("language", lang);
+    }
+
+    setLanguage(savedLang);
+  </script>
+</body>
+</html>

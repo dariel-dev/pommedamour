@@ -1,0 +1,42 @@
+<form id="searchForm" class="d-flex mb-4">
+  <input id="searchInput" class="form-control me-2" type="search" placeholder="Search products…" aria-label="Search">
+  <select id="categoryFilter" class="form-select me-2">
+    <option value="">All Categories</option>
+    <option value="trenches">Trenches</option>
+    <option value="jeans">Jeans</option>
+    <option value="belts">Belts</option>
+    <option value="trousers">Trousers</option>
+    <!-- Add more categories as needed -->
+  </select>
+  <select id="sortSelect" class="form-select me-2">
+    <option value="relevance">Relevance</option>
+    <option value="price-asc">Price ↑</option>
+    <option value="price-desc">Price ↓</option>
+    <option value="newest">Newest</option>
+  </select>
+  <button class="btn btn-danger" type="submit">Search</button>
+</form>
+
+
+
+do you see these changes optimized for mobile about the image placeholder that will hold 15 pro max images in the products.html page above?
+
+Key changes made:
+
+Increased the default image height from 380px to 450px for desktop screens
+
+Adjusted all responsive breakpoints to maintain proportionally larger images:
+
+1199.98px and below: 380px (was 320px)
+
+991.98px and below: 340px (was 280px)
+
+767.98px and below: 300px (was 240px)
+
+
+
+575.98px and below: 260px (was 200px)
+
+400px and below: 220px (was 180px)
+
+These changes will make the product images more prominent while maintaining the same aspect ratio and responsive behavior. The images will now better showcase iPhone 15 Pro Max photos while keeping all other design elements exactly the same.

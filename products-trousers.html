@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trousers Collection - My Mom's Clothing Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      padding-top: 70px;
+    }
+
+    .subproduct-header {
+      background-color: #c92121;
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s;
+      width: 40px;
+      justify-content: center;
+    }
+
+    .back-btn:hover {
+      opacity: 0.8;
+      color: white;
+    }
+
+    @media (max-width: 767.98px) {
+      .header-content {
+        display: grid;
+        grid-template-columns: 40px 1fr 40px;
+        align-items: center;
+        padding: 0 1rem;
+      }
+      
+      .logo-container {
+        grid-column: 2;
+        display: flex;
+        justify-content: center;
+      }
+      
+      .back-btn-container {
+        grid-column: 1;
+      }
+      
+      .spacer {
+        grid-column: 3;
+        width: 40px;
+      }
+    }
+
+    .product-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 1.5rem;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 991.98px) {
+      .product-card img {
+        height: 380px;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .product-card img {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .product-card img {
+        height: 450px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .product-card img {
+        height: 400px;
+      }
+    }
+
+    .product-card-body {
+      padding: 1rem;
+    }
+
+    .product-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card .price {
+      color: #d6336c;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .product-card .btn {
+      display: block;
+      background-color: #c92121;
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .product-card .btn:hover {
+      background-color: #a81b1b;
+    }
+
+    .pagination-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 30px 0;
+      align-items: center;
+    }
+
+    .pagination-container button {
+      padding: 8px 15px;
+      border: none;
+      background-color: #d6336c;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .pagination-container button:disabled {
+      background-color: #aaa;
+      cursor: default;
+    }
+
+    .pagination-container select {
+      padding: 8px 15px;
+      border: none;
+      background-color: #ffccda;
+      color: #333;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .pagination-container button:hover:not(:disabled) {
+      background-color: #c92121;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .social-icons {
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 10px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: #c92121;
+      transform: translateY(-3px);
+    }
+
+    .footer-links {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffdddd;
+      text-decoration: underline;
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .highlighted-product {
+      animation: highlight 2s ease-in-out;
+      box-shadow: 0 0 0 4px #d6336c;
+      position: relative;
+      padding-top: 20px;
+      margin-top: -20px;
+    }
+
+    .highlighted-product::before {
+      content: "";
+      display: block;
+      height: 70px;
+      margin-top: -70px;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .highlighted-product::after {
+      content: "★";
+      position: absolute;
+      top: 10px;
+      right: -10px;
+      background: #d6336c;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      z-index: 10;
+    }
+
+    @keyframes highlight {
+      0% { box-shadow: 0 0 0 4px #d6336c; }
+      50% { box-shadow: 0 0 0 8px rgba(214, 51, 108, 0.5); }
+      100% { box-shadow: 0 0 0 4px #d6336c; }
+    }
+
+    @media (max-width: 767.98px) {
+      .highlighted-product {
+        padding-top: 15px;
+        margin-top: -15px;
+      }
+      
+      .highlighted-product::before {
+        height: 60px;
+        margin-top: -60px;
+      }
+      
+      .highlighted-product::after {
+        top: 5px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+      }
+    }
+
+    .product-col {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="subproduct-header">
+    <div class="header-content">
+      <div class="back-btn-container">
+        <a href="products.html" class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      </div>
+      
+      <div class="logo-container">
+        <a href="index.html">
+          <img src="images/PommeLogo-removebg-preview1 (1).png" alt="My Mom's Shop" class="logo-img">
+        </a>
+      </div>
+      
+      <div class="spacer"></div>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <h2 class="mb-4 text-center" data-key="trousers-collection">Trousers Collection</h2>
+    <div class="row g-4" id="product-grid"></div>
+
+    <div class="pagination-container">
+      <button id="backBtn" class="btn" data-key="all-categories">
+        <i class="fas fa-arrow-left me-1"></i> All Categories
+      </button>
+      <button id="prevBtn" data-key="previous">Previous</button>
+      <select id="pageSelect"></select>
+      <span id="pageStatus">1/1</span>
+      <button id="nextBtn" data-key="next">Next</button>
+      <button id="firstBtn" class="btn-danger" style="display: none;" data-key="first-page">First Page</button>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p data-key="footer-copy">&copy; 2025 My Mom's Clothing Shop | Designed by Dariel</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="contact.html" data-key="footer-contact">Contact</a>
+        <a href="privacy.html" data-key="privacy">Privacy Policy</a>
+        <a href="terms.html" data-key="terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      { id: 1, name: "Classic Tailored Trousers", alName: "Pantallona Klasike të Përshtatura", price: 5200, image: "images/trousers/tailored.jpg", description: "Timeless tailored trousers for formal occasions", alDescription: "Pantallona klasike të përshtatura për raste formale" },
+      { id: 2, name: "Slim Fit Chinos", alName: "Chino të Ngushta", price: 4800, image: "images/trousers/chinos.jpg", description: "Versatile slim fit chino pants", alDescription: "Pantallona Chino të shndërrueshme me përshtatje të ngushtë" },
+      { id: 3, name: "Wide Leg Pants", alName: "Pantallona me Këmbë të Gjera", price: 5500, image: "images/trousers/wide_leg.jpg", description: "Trendy wide leg trousers", alDescription: "Pantallona moderne me këmbë të gjera" },
+      { id: 4, name: "Cropped Trousers", alName: "Pantallona të Shkurtra", price: 4900, image: "images/trousers/cropped.jpg", description: "Modern cropped length trousers", alDescription: "Pantallona moderne me gjatësi të shkurtër" },
+      { id: 5, name: "High Waisted Pants", alName: "Pantallona me Bel të Lartë", price: 5300, image: "images/trousers/high_waist.jpg", description: "Flattering high waisted trousers", alDescription: "Pantallona që përshtaten bukur me bel të lartë" },
+      { id: 6, name: "Pleated Trousers", alName: "Pantallona me Palosje", price: 5700, image: "images/trousers/pleated.jpg", description: "Elegant pleated detail trousers", alDescription: "Pantallona elegante me detaje palosjesh" },
+      { id: 7, name: "Linen Pants", alName: "Pantallona Liri", price: 5100, image: "images/trousers/linen.jpg", description: "Breathable linen summer pants", alDescription: "Pantallona verore me liri që lejojnë frymëmarrje" },
+      { id: 8, name: "Culottes", alName: "Pantallona Culotte", price: 5400, image: "images/trousers/culottes.jpg", description: "Stylish culotte style trousers", alDescription: "Pantallona elegante në stil culotte" },
+      { id: 9, name: "Paperbag Waist Pants", alName: "Pantallona me Bel Si Qese", price: 5600, image: "images/trousers/paperbag.jpg", description: "Trendy paperbag waist trousers", alDescription: "Pantallona moderne me bel si qese" },
+      { id: 10, name: "Tuxedo Pants", alName: "Pantallona Smoking", price: 6200, image: "images/trousers/tuxedo.jpg", description: "Formal tuxedo style trousers", alDescription: "Pantallona formale në stil smoking" },
+      { id: 11, name: "Cargo Pants", alName: "Pantallona Cargo", price: 5800, image: "images/trousers/cargo.jpg", description: "Practical cargo style pants", alDescription: "Pantallona praktike në stil cargo" },
+      { id: 12, name: "Flared Pants", alName: "Pantallona me Këmbë të Zgjera", price: 5900, image: "images/trousers/flared.jpg", description: "70s inspired flared trousers", alDescription: "Pantallona me frymë të viteve 70 me këmbë të zgjeruara" },
+      { id: 13, name: "Stripe Detail Pants", alName: "Pantallona me Detaje Vija", price: 5400, image: "images/trousers/stripe.jpg", description: "Modern trousers with stripe details", alDescription: "Pantallona moderne me detaje vija" },
+      { id: 14, name: "Corduroy Pants", alName: "Pantallona Pambuk", price: 6100, image: "images/trousers/corduroy.jpg", description: "Warm corduroy winter pants", alDescription: "Pantallona dimërore të ngrohta me pambuk" },
+      { id: 15, name: "Harem Pants", alName: "Pantallona Harem", price: 5200, image: "images/trousers/harem.jpg", description: "Comfortable harem style trousers", alDescription: "Pantallona të rehatshme në stil harem" },
+      { id: 16, name: "Wool Blend Trousers", alName: "Pantallona me Përzierje Leshi", price: 6800, image: "images/trousers/wool.jpg", description: "Warm wool blend formal pants", alDescription: "Pantallona formale të ngrohta me përzierje leshi" },
+      { id: 17, name: "Jogger Pants", alName: "Pantallona Sportive", price: 4900, image: "images/trousers/jogger.jpg", description: "Casual sporty jogger pants", alDescription: "Pantallona sportive të përditshme" },
+      { id: 18, name: "Gaucho Pants", alName: "Pantallona Gaucho", price: 5500, image: "images/trousers/gaucho.jpg", description: "Stylish gaucho style trousers", alDescription: "Pantallona elegante në stil gaucho" },
+      { id: 19, name: "Pinstripe Trousers", alName: "Pantallona me Vija të Holla", price: 6400, image: "images/trousers/pinstripe.jpg", description: "Business pinstripe formal pants", alDescription: "Pantallona formale pune me vija të holla" },
+      { id: 20, name: "Denim Pants", alName: "Pantallona Xhinse", price: 5700, image: "images/trousers/denim.jpg", description: "Classic denim trousers", alDescription: "Pantallona klasike xhinse" },
+      { id: 21, name: "Velvet Pants", alName: "Pantallona Kadife", price: 7200, image: "images/trousers/velvet.jpg", description: "Luxurious velvet evening pants", alDescription: "Pantallona luksoze mbrëmje me kadife" },
+      { id: 22, name: "Tie Waist Pants", alName: "Pantallona me Lidhje Beli", price: 5800, image: "images/trousers/tie_waist.jpg", description: "Feminine tie waist trousers", alDescription: "Pantallona femërore me lidhje beli" },
+      { id: 23, name: "Stretch Ankle Pants", alName: "Pantallona të Elastikuara në Kyç", price: 5300, image: "images/trousers/stretch.jpg", description: "Comfortable stretch ankle trousers", alDescription: "Pantallona të rehatshme të elastikuara në kyç" },
+      { id: 24, name: "Belted Wide Leg Pants", alName: "Pantallona me Këmbë të Gjera dhe Rrip", price: 5900, image: "images/trousers/belted_wide.jpg", description: "Elegant belted wide leg trousers", alDescription: "Pantallona elegante me këmbë të gjera dhe rrip" },
+      { id: 25, name: "Cropped Flare Pants", alName: "Pantallona të Shkurtra me Këmbë të Zgjera", price: 5600, image: "images/trousers/cropped_flare.jpg", description: "Trendy cropped flare trousers", alDescription: "Pantallona moderne të shkurtra me këmbë të zgjeruara" },
+      { id: 26, name: "Side Stripe Pants", alName: "Pantallona me Vija Anësore", price: 5400, image: "images/trousers/side_stripe.jpg", description: "Sporty side stripe trousers", alDescription: "Pantallona sportive me vija anësore" },
+      { id: 27, name: "Pleated Wide Leg Pants", alName: "Pantallona me Palosje dhe Këmbë të Gjera", price: 6100, image: "images/trousers/pleated_wide.jpg", description: "Elegant pleated wide leg trousers", alDescription: "Pantallona elegante me palosje dhe këmbë të gjera" },
+      { id: 28, name: "Belted Culottes", alName: "Pantallona Culotte me Rrip", price: 5700, image: "images/trousers/belted_culotte.jpg", description: "Stylish belted culotte pants", alDescription: "Pantallona elegante culotte me rrip" },
+      { id: 29, name: "Checked Pants", alName: "Pantallona me Kuadrate", price: 5900, image: "images/trousers/checked.jpg", description: "Classic checked pattern trousers", alDescription: "Pantallona klasike me model kuadrate" },
+      { id: 30, name: "Faux Leather Pants", alName: "Pantallona Lëkurë Artificiale", price: 6500, image: "images/trousers/faux_leather.jpg", description: "Edgy faux leather trousers", alDescription: "Pantallona moderne me lëkurë artificiale" },
+      { id: 31, name: "High Waisted Wide Leg", alName: "Pantallona me Bel të Lartë dhe Këmbë të Gjera", price: 6200, image: "images/trousers/high_wide.jpg", description: "Flattering high waisted wide leg", alDescription: "Pantallona që përshtaten bukur me bel të lartë dhe këmbë të gjera" },
+      { id: 32, name: "Twill Pants", alName: "Pantallona Twill", price: 5800, image: "images/trousers/twill.jpg", description: "Durable twill fabric trousers", alDescription: "Pantallona të qëndrueshme me pëlhurë twill" },
+      { id: 33, name: "Cropped Cigarette Pants", alName: "Pantallona të Shkurtra Cigarette", price: 5400, image: "images/trousers/cigarette.jpg", description: "Slim cropped cigarette trousers", alDescription: "Pantallona të ngushta të shkurtra cigarette" },
+      { id: 34, name: "Belted Paperbag Pants", alName: "Pantallona me Bel Si Qese dhe Rrip", price: 5900, image: "images/trousers/belted_paperbag.jpg", description: "Trendy belted paperbag trousers", alDescription: "Pantallona moderne me bel si qese dhe rrip" },
+      { id: 35, name: "Linen Blend Pants", alName: "Pantallona me Përzierje Liri", price: 5600, image: "images/trousers/linen_blend.jpg", description: "Breathable linen blend trousers", alDescription: "Pantallona që lejojnë frymëmarrje me përzierje liri" },
+      { id: 36, name: "Structured Trousers", alName: "Pantallona të Strukturuara", price: 6300, image: "images/trousers/structured.jpg", description: "Sharp structured formal pants", alDescription: "Pantallona formale të strukturuara" },
+      { id: 37, name: "Side Zip Pants", alName: "Pantallona me Zinxhir Anësor", price: 5800, image: "images/trousers/side_zip.jpg", description: "Modern trousers with side zipper", alDescription: "Pantallona moderne me zinxhir anësor" },
+      { id: 38, name: "Cropped Harem Pants", alName: "Pantallona të Shkurtra Harem", price: 5500, image: "images/trousers/cropped_harem.jpg", description: "Comfortable cropped harem trousers", alDescription: "Pantallona të rehatshme të shkurtra në stil harem" },
+      { id: 39, name: "Wool Trousers", alName: "Pantallona Leshi", price: 6900, image: "images/trousers/wool_pants.jpg", description: "Warm wool winter pants", alDescription: "Pantallona dimërore të ngrohta me lesh" },
+      { id: 40, name: "Peg Leg Pants", alName: "Pantallona Peg Leg", price: 5700, image: "images/trousers/peg_leg.jpg", description: "Vintage inspired peg leg trousers", alDescription: "Pantallona me frymë vintage peg leg" },
+      { id: 41, name: "Tie Dye Pants", alName: "Pantallona Tie Dye", price: 5400, image: "images/trousers/tie_dye.jpg", description: "Boho chic tie dye trousers", alDescription: "Pantallona në stil boho tie dye" },
+      { id: 42, name: "Cropped Wide Leg", alName: "Pantallona të Shkurtra me Këmbë të Gjera", price: 5800, image: "images/trousers/cropped_wide.jpg", description: "Trendy cropped wide leg trousers", alDescription: "Pantallona moderne të shkurtra me këmbë të gjera" },
+      { id: 43, name: "Stretch Waist Pants", alName: "Pantallona me Bel të Elastikuar", price: 5600, image: "images/trousers/stretch_waist.jpg", description: "Comfortable stretch waist trousers", alDescription: "Pantallona të rehatshme me bel të elastikuar" },
+      { id: 44, name: "Pleated Culottes", alName: "Pantallona Culotte me Palosje", price: 5900, image: "images/trousers/pleated_culotte.jpg", description: "Elegant pleated culotte pants", alDescription: "Pantallona elegante culotte me palosje" },
+      { id: 45, name: "Belted Trousers", alName: "Pantallona me Rrip", price: 6100, image: "images/trousers/belted.jpg", description: "Classic belted formal trousers", alDescription: "Pantallona klasike formale me rrip" },
+      { id: 46, name: "Linen Drawstring Pants", alName: "Pantallona Liri me Rrip Tërheqës", price: 5400, image: "images/trousers/linen_drawstring.jpg", description: "Casual linen drawstring trousers", alDescription: "Pantallona të përditshme liri me rrip tërheqës" },
+      { id: 47, name: "High Waisted Culottes", alName: "Pantallona Culotte me Bel të Lartë", price: 6200, image: "images/trousers/high_culotte.jpg", description: "Flattering high waisted culottes", alDescription: "Pantallona culotte që përshtaten bukur me bel të lartë" },
+      { id: 48, name: "Tweed Pants", alName: "Pantallona Tweed", price: 6500, image: "images/trousers/tweed.jpg", description: "Classic tweed fabric trousers", alDescription: "Pantallona klasike me pëlhurë tweed" },
+      { id: 49, name: "Oversized Trousers", alName: "Pantallona të Mëdha", price: 5800, image: "images/trousers/oversized.jpg", description: "Comfortable oversized pants", alDescription: "Pantallona të rehatshme të mëdha" },
+      { id: 50, name: "Custom Tailored Pants", alName: "Pantallona të Përshtatura Personalizuar", price: 7500, image: "images/trousers/custom.jpg", description: "Personalized tailored trousers", alDescription: "Pantallona të përshtatura personalizuar" }
+    ];
+
+    const productsPerPage = 8;
+    let currentPage = 1;
+    const totalPages = Math.ceil(products.length / productsPerPage);
+
+    const productGrid = document.getElementById("product-grid");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const firstBtn = document.getElementById("firstBtn");
+    const backBtn = document.getElementById("backBtn");
+    const pageStatus = document.getElementById("pageStatus");
+    const pageSelect = document.getElementById("pageSelect");
+
+    function getUrlParams() {
+      const params = {};
+      const queryString = window.location.search.substring(1);
+      const pairs = queryString.split('&');
+      
+      pairs.forEach(pair => {
+        const [key, value] = pair.split('=');
+        if (key && value) {
+          params[key] = decodeURIComponent(value);
+        }
+      });
+      
+      return params;
+    }
+
+    function highlightProduct(productId) {
+      const productElement = document.getElementById(`product-${productId}`);
+      if (productElement) {
+        productElement.classList.add('highlighted-product');
+        
+        setTimeout(() => {
+          const headerHeight = document.querySelector('.subproduct-header').offsetHeight;
+          const elementPosition = productElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    }
+
+    const urlParams = getUrlParams();
+    const highlightProductId = urlParams.highlight;
+    const requestedPage = urlParams.page ? parseInt(urlParams.page) : 1;
+
+    if (requestedPage && !isNaN(requestedPage) && requestedPage >= 1 && requestedPage <= totalPages) {
+      currentPage = requestedPage;
+    }
+
+    function renderProducts(page) {
+      productGrid.innerHTML = "";
+      const start = (page - 1) * productsPerPage;
+      const end = Math.min(start + productsPerPage, products.length);
+      const lang = localStorage.getItem("language") || "en";
+
+      for (let i = start; i < end; i++) {
+        const prod = products[i];
+        const col = document.createElement("div");
+        col.className = "col-12 col-sm-6 col-md-4 col-lg-3 product-col";
+        col.id = `product-${prod.id}`;
+
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <img src="${prod.image}" alt="${lang === 'al' ? prod.alName : prod.name}" class="img-fluid" onerror="this.onerror=null;this.src='images/trousers/default.jpg';" />
+          <div class="product-card-body">
+            <h3>${lang === 'al' ? prod.alName : prod.name}</h3>
+            <p data-key="trousers-desc" data-index="${prod.id}">${lang === 'al' ? prod.alDescription : prod.description}</p>
+            <p class="price">${lang === 'al' ? 'Cmimi' : 'Price'}: ${prod.price} L</p>
+            <a href="contact.html" class="btn" data-key="order-cta">${lang === 'al' ? 'Kontaktoni për Porosi' : 'Contact to Order'}</a>
+          </div>
+        `;
+        col.appendChild(card);
+        productGrid.appendChild(col);
+      }
+
+      pageStatus.textContent = `${page}/${totalPages}`;
+      prevBtn.disabled = page === 1;
+      nextBtn.disabled = page === totalPages;
+      firstBtn.style.display = page === totalPages && totalPages > 1 ? "inline-block" : "none";
+
+      pageSelect.innerHTML = "";
+      for (let i = 1; i <= totalPages; i++) {
+        const opt = document.createElement("option");
+        opt.value = i;
+        opt.textContent = `${lang === 'al' ? 'Faqja' : 'Page'} ${i}`;
+        if (i === page) opt.selected = true;
+        pageSelect.appendChild(opt);
+      }
+
+      if (highlightProductId) {
+        setTimeout(() => {
+          highlightProduct(highlightProductId);
+        }, 100);
+      }
+
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('page', page);
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderProducts(currentPage);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderProducts(currentPage);
+      }
+    });
+
+    firstBtn.addEventListener("click", () => {
+      currentPage = 1;
+      renderProducts(currentPage);
+    });
+
+    pageSelect.addEventListener("change", (e) => {
+      currentPage = parseInt(e.target.value);
+      renderProducts(currentPage);
+    });
+
+    backBtn.addEventListener("click", () => {
+      window.location.href = "products.html";
+    });
+
+    renderProducts(currentPage);
+  </script>
+  <script src="js/lang.js"></script>
+</body>
+</html>

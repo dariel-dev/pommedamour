@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jackets Collection - My Mom's Clothing Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      padding-top: 70px;
+    }
+
+    .subproduct-header {
+      background-color: #c92121;
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s;
+      width: 40px;
+      justify-content: center;
+    }
+
+    .back-btn:hover {
+      opacity: 0.8;
+      color: white;
+    }
+
+    @media (max-width: 767.98px) {
+      .header-content {
+        display: grid;
+        grid-template-columns: 40px 1fr 40px;
+        align-items: center;
+        padding: 0 1rem;
+      }
+      
+      .logo-container {
+        grid-column: 2;
+        display: flex;
+        justify-content: center;
+      }
+      
+      .back-btn-container {
+        grid-column: 1;
+      }
+      
+      .spacer {
+        grid-column: 3;
+        width: 40px;
+      }
+    }
+
+    .product-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 1.5rem;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 991.98px) {
+      .product-card img {
+        height: 380px;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .product-card img {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .product-card img {
+        height: 450px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .product-card img {
+        height: 400px;
+      }
+    }
+
+    .product-card-body {
+      padding: 1rem;
+    }
+
+    .product-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card .price {
+      color: #d6336c;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .product-card .btn {
+      display: block;
+      background-color: #c92121;
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .product-card .btn:hover {
+      background-color: #a81b1b;
+    }
+
+    .pagination-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 30px 0;
+      align-items: center;
+    }
+
+    .pagination-container button {
+      padding: 8px 15px;
+      border: none;
+      background-color: #d6336c;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .pagination-container button:disabled {
+      background-color: #aaa;
+      cursor: default;
+    }
+
+    .pagination-container select {
+      padding: 8px 15px;
+      border: none;
+      background-color: #ffccda;
+      color: #333;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .pagination-container button:hover:not(:disabled) {
+      background-color: #c92121;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .social-icons {
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 10px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: #c92121;
+      transform: translateY(-3px);
+    }
+
+    .footer-links {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffdddd;
+      text-decoration: underline;
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .highlighted-product {
+      animation: highlight 2s ease-in-out;
+      box-shadow: 0 0 0 4px #d6336c;
+      position: relative;
+      padding-top: 20px;
+      margin-top: -20px;
+    }
+
+    .highlighted-product::before {
+      content: "";
+      display: block;
+      height: 70px;
+      margin-top: -70px;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .highlighted-product::after {
+      content: "★";
+      position: absolute;
+      top: 10px;
+      right: -10px;
+      background: #d6336c;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      z-index: 10;
+    }
+
+    @keyframes highlight {
+      0% { box-shadow: 0 0 0 4px #d6336c; }
+      50% { box-shadow: 0 0 0 8px rgba(214, 51, 108, 0.5); }
+      100% { box-shadow: 0 0 0 4px #d6336c; }
+    }
+
+    @media (max-width: 767.98px) {
+      .highlighted-product {
+        padding-top: 15px;
+        margin-top: -15px;
+      }
+      
+      .highlighted-product::before {
+        height: 60px;
+        margin-top: -60px;
+      }
+      
+      .highlighted-product::after {
+        top: 5px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+      }
+    }
+
+    .product-col {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="subproduct-header">
+    <div class="header-content">
+      <div class="back-btn-container">
+        <a href="products.html" class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      </div>
+      
+      <div class="logo-container">
+        <a href="index.html">
+          <img src="images/PommeLogo-removebg-preview1 (1).png" alt="My Mom's Shop" class="logo-img">
+        </a>
+      </div>
+      
+      <div class="spacer"></div>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <h2 class="mb-4 text-center" data-key="jackets-collection">Jackets Collection</h2>
+    <div class="row g-4" id="product-grid"></div>
+
+    <div class="pagination-container">
+      <button id="backBtn" class="btn" data-key="all-categories">
+        <i class="fas fa-arrow-left me-1"></i> All Categories
+      </button>
+      <button id="prevBtn" data-key="previous">Previous</button>
+      <select id="pageSelect"></select>
+      <span id="pageStatus">1/1</span>
+      <button id="nextBtn" data-key="next">Next</button>
+      <button id="firstBtn" class="btn-danger" style="display: none;" data-key="first-page">First Page</button>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p data-key="footer-copy">&copy; 2025 My Mom's Clothing Shop | Designed by Dariel</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="contact.html" data-key="footer-contact">Contact</a>
+        <a href="privacy.html" data-key="privacy">Privacy Policy</a>
+        <a href="terms.html" data-key="terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      { id: 1, name: "Leather Biker Jacket", alName: "Xhaketë Lëkure Motociklisti", price: 12500, image: "images/jackets/biker.jpg", description: "Classic biker jacket with zipper details", alDescription: "Xhaketë klasike motociklisti me detaje zinxhirësh" },
+      { id: 2, name: "Denim Jacket", alName: "Xhaketë Xhinse", price: 8500, image: "images/jackets/denim.jpg", description: "Timeless denim jacket with front pockets", alDescription: "Xhaketë e përjetshme xhinse me xhepa përpara" },
+      { id: 3, name: "Trench Coat", alName: "Pallto Trench", price: 14500, image: "images/jackets/trench.jpg", description: "Elegant belted trench coat", alDescription: "Pallto elegante trench me rrip" },
+      { id: 4, name: "Bomber Jacket", alName: "Xhaketë Bomber", price: 9500, image: "images/jackets/bomber.jpg", description: "Sporty bomber jacket with ribbed cuffs", alDescription: "Xhaketë sportive bomber me mëngë të rrudhura" },
+      { id: 5, name: "Wool Peacoat", alName: "Xhaketë Leshi Ushtarake", price: 13500, image: "images/jackets/peacoat.jpg", description: "Warm wool peacoat with double-breasted front", alDescription: "Xhaketë e ngrohtë leshi me dy rreshta butonash" },
+      { id: 6, name: "Puffer Jacket", alName: "Xhaketë e Fryrë", price: 11500, image: "images/jackets/puffer.jpg", description: "Lightweight insulated puffer jacket", alDescription: "Xhaketë e lehtë e izoluar e fryrë" },
+      { id: 7, name: "Blazer", alName: "Blazer", price: 10500, image: "images/jackets/blazer.jpg", description: "Structured formal blazer with notch lapel", alDescription: "Blazer i strukturuar formal me jakë të prerë" },
+      { id: 8, name: "Rain Jacket", alName: "Xhaketë Shiu", price: 7500, image: "images/jackets/rain.jpg", description: "Waterproof rain jacket with hood", alDescription: "Xhaketë rezistente ndaj ujit me kapuç" },
+      { id: 9, name: "Quilted Jacket", alName: "Xhaketë me Jastëk", price: 9800, image: "images/jackets/quilted.jpg", description: "Stylish quilted jacket with diamond pattern", alDescription: "Xhaketë elegante me jastëk në model diamanti" },
+      { id: 10, name: "Fleece Jacket", alName: "Xhaketë Fleece", price: 6500, image: "images/jackets/fleece.jpg", description: "Cozy fleece jacket for casual wear", alDescription: "Xhaketë e rehatshme fleece për përdorim të përditshëm" },
+      { id: 11, name: "Military Jacket", alName: "Xhaketë Ushtarake", price: 11000, image: "images/jackets/military.jpg", description: "Vintage inspired military style jacket", alDescription: "Xhaketë në stil ushtarak me frymë vintage" },
+      { id: 12, name: "Faux Fur Jacket", alName: "Xhaketë me Gëzof Artificial", price: 12500, image: "images/jackets/faux_fur.jpg", description: "Luxurious faux fur coat", alDescription: "Xhaketë luksoze me gëzof artificial" },
+      { id: 13, name: "Parka", alName: "Parka", price: 13800, image: "images/jackets/parka.jpg", description: "Winter parka with faux fur trim", alDescription: "Parka dimërore me buzë gëzof artificial" },
+      { id: 14, name: "Windbreaker", alName: "Xhaketë Kundër Erës", price: 7200, image: "images/jackets/windbreaker.jpg", description: "Lightweight wind resistant jacket", alDescription: "Xhaketë e lehtë rezistente ndaj erës" },
+      { id: 15, name: "Suede Jacket", alName: "Xhaketë Suede", price: 14200, image: "images/jackets/suede.jpg", description: "Soft suede moto jacket", alDescription: "Xhaketë e butë suede moto" },
+      { id: 16, name: "Cropped Jacket", alName: "Xhaketë e Shkurtër", price: 8800, image: "images/jackets/cropped.jpg", description: "Trendy cropped length jacket", alDescription: "Xhaketë moderne me gjatësi të shkurtër" },
+      { id: 17, name: "Double-Faced Wool Coat", alName: "Pallto me Dy Faqe Leshi", price: 15800, image: "images/jackets/double_face.jpg", description: "Luxury reversible wool coat", alDescription: "Pallto luksoze leshi e kthyeshme" },
+      { id: 18, name: "Corduroy Jacket", alName: "Xhaketë Korduroi", price: 9200, image: "images/jackets/corduroy.jpg", description: "Casual corduroy jacket with elbow patches", alDescription: "Xhaketë e përditshme korduroi me pjesë mbi bërryla" },
+      { id: 19, name: "Oversized Denim Jacket", alName: "Xhaketë Xhinse e Madhe", price: 8900, image: "images/jackets/oversized_denim.jpg", description: "Relaxed fit oversized denim jacket", alDescription: "Xhaketë xhinse e madhe me përshtatje të relaksuar" },
+      { id: 20, name: "Waxed Jacket", alName: "Xhaketë e Dylluar", price: 11200, image: "images/jackets/waxed.jpg", description: "Water resistant waxed cotton jacket", alDescription: "Xhaketë pambuku e dylluar rezistente ndaj ujit" },
+      { id: 21, name: "Tweed Jacket", alName: "Xhaketë Tweed", price: 10800, image: "images/jackets/tweed.jpg", description: "Classic tweed blazer jacket", alDescription: "Xhaketë klasike blazer tweed" },
+      { id: 22, name: "Hooded Anorak", alName: "Anorak me Kapuç", price: 8200, image: "images/jackets/anorak.jpg", description: "Sporty hooded anorak jacket", alDescription: "Xhaketë sportive anorak me kapuç" },
+      { id: 23, name: "Faux Leather Jacket", alName: "Xhaketë Lëkure Artificiale", price: 9800, image: "images/jackets/faux_leather.jpg", description: "Vegan leather moto jacket", alDescription: "Xhaketë moto me lëkurë vegane" },
+      { id: 24, name: "Cape Jacket", alName: "Xhaketë Cape", price: 10500, image: "images/jackets/cape.jpg", description: "Dramatic cape style jacket", alDescription: "Xhaketë në stil cape dramatike" },
+      { id: 25, name: "Quilted Puffer Vest", alName: "Xhaketë e Fryrë pa Mëngë", price: 8500, image: "images/jackets/puffer_vest.jpg", description: "Sleeveless quilted puffer vest", alDescription: "Xhaketë e fryrë pa mëngë me jastëk" },
+      { id: 26, name: "Sherpa Jacket", alName: "Xhaketë Sherpa", price: 9500, image: "images/jackets/sherpa.jpg", description: "Cozy sherpa lined denim jacket", alDescription: "Xhaketë xhinse me mbushje sherpa të rehatshme" },
+      { id: 27, name: "Cropped Puffer", alName: "Xhaketë e Fryrë e Shkurtër", price: 10200, image: "images/jackets/cropped_puffer.jpg", description: "Short puffer jacket with high collar", alDescription: "Xhaketë e fryrë e shkurtër me jakë të lartë" },
+      { id: 28, name: "Belted Wool Coat", alName: "Pallto Leshi me Rrip", price: 14800, image: "images/jackets/belted_wool.jpg", description: "Elegant belted wool coat", alDescription: "Pallto elegante leshi me rrip" },
+      { id: 29, name: "Neon Windbreaker", alName: "Xhaketë Kundër Erës Neoni", price: 7800, image: "images/jackets/neon.jpg", description: "Bright neon windbreaker jacket", alDescription: "Xhaketë e ndritshme neoni kundër erës" },
+      { id: 30, name: "Fleece-Lined Denim", alName: "Xhaketë Xhinse me Mbushje Fleece", price: 9200, image: "images/jackets/fleece_denim.jpg", description: "Denim jacket with cozy fleece lining", alDescription: "Xhaketë xhinse me mbushje fleece të rehatshme" },
+      { id: 31, name: "Cropped Trench", alName: "Trench i Shkurtër", price: 11800, image: "images/jackets/cropped_trench.jpg", description: "Modern cropped trench coat", alDescription: "Pallto modern trench me gjatësi të shkurtër" },
+      { id: 32, name: "Hooded Puffer", alName: "Xhaketë e Fryrë me Kapuç", price: 12500, image: "images/jackets/hooded_puffer.jpg", description: "Warm hooded puffer jacket", alDescription: "Xhaketë e ngrohtë e fryrë me kapuç" },
+      { id: 33, name: "Borg Jacket", alName: "Xhaketë Borg", price: 13200, image: "images/jackets/borg.jpg", description: "Waterproof borg lined winter jacket", alDescription: "Xhaketë dimërore rezistente ndaj ujit me mbushje borg" },
+      { id: 34, name: "Faux Shearling Jacket", alName: "Xhaketë me Lesh Artificial", price: 11500, image: "images/jackets/shearling.jpg", description: "Cozy shearling style jacket", alDescription: "Xhaketë e rehatshme në stil leshi artificial" },
+      { id: 35, name: "Cropped Leather Jacket", alName: "Xhaketë Lëkure e Shkurtër", price: 12200, image: "images/jackets/cropped_leather.jpg", description: "Short length leather moto jacket", alDescription: "Xhaketë moto lëkure me gjatësi të shkurtër" },
+      { id: 36, name: "Quilted Bomber", alName: "Xhaketë Bomber me Jastëk", price: 10800, image: "images/jackets/quilted_bomber.jpg", description: "Quilted detail bomber jacket", alDescription: "Xhaketë bomber me detaje jastëku" },
+      { id: 37, name: "Oversized Blazer", alName: "Blazer i Madh", price: 9800, image: "images/jackets/oversized_blazer.jpg", description: "Relaxed fit oversized blazer", alDescription: "Blazer i madh me përshtatje të relaksuar" },
+      { id: 38, name: "Reversible Jacket", alName: "Xhaketë e Kthyeshme", price: 11200, image: "images/jackets/reversible.jpg", description: "Two-in-one reversible jacket", alDescription: "Xhaketë 2-në-1 e kthyeshme" },
+      { id: 39, name: "Twill Utility Jacket", alName: "Xhaketë Utility Twill", price: 8900, image: "images/jackets/utility.jpg", description: "Casual utility jacket with multiple pockets", alDescription: "Xhaketë e përditshme utility me shumë xhepa" },
+      { id: 40, name: "Faux Fur Trim Parka", alName: "Parka me Buzë Gëzof", price: 14500, image: "images/jackets/fur_trim.jpg", description: "Winter parka with luxurious faux fur trim", alDescription: "Parka dimërore me buzë gëzof artificial luksoze" },
+      { id: 41, name: "Cropped Denim Jacket", alName: "Xhaketë Xhinse e Shkurtër", price: 8200, image: "images/jackets/cropped_denim.jpg", description: "Short length denim jacket", alDescription: "Xhaketë xhinse me gjatësi të shkurtër" },
+      { id: 42, name: "Puffer Gilet", alName: "Xhaketë e Fryrë pa Mëngë", price: 7800, image: "images/jackets/gilet.jpg", description: "Sleeveless puffer vest", alDescription: "Xhaketë e fryrë pa mëngë" },
+      { id: 43, name: "Wool Blend Coat", alName: "Pallto me Përzierje Leshi", price: 13800, image: "images/jackets/wool_blend.jpg", description: "Warm wool blend winter coat", alDescription: "Pallto dimërore me përzierje leshi" },
+      { id: 44, name: "Corduroy Trench", alName: "Trench Korduroi", price: 11800, image: "images/jackets/corduroy_trench.jpg", description: "Corduroy trench coat with belt", alDescription: "Pallto trench korduroi me rrip" },
+      { id: 45, name: "Lightweight Packable Jacket", alName: "Xhaketë e Lehtë e Palosshme", price: 8500, image: "images/jackets/packable.jpg", description: "Compact packable travel jacket", alDescription: "Xhaketë e lehtë udhëtimi e palosshme" },
+      { id: 46, name: "Faux Leather Trench", alName: "Trench Lëkure Artificiale", price: 12800, image: "images/jackets/leather_trench.jpg", description: "Vegan leather trench coat", alDescription: "Pallto trench me lëkurë vegane" },
+      { id: 47, name: "Quilted Hooded Jacket", alName: "Xhaketë me Kapuç dhe Jastëk", price: 11200, image: "images/jackets/quilted_hooded.jpg", description: "Warm quilted jacket with hood", alDescription: "Xhaketë e ngrohtë me kapuç dhe jastëk" },
+      { id: 48, name: "Denim Sherpa Jacket", alName: "Xhaketë Xhinse Sherpa", price: 9800, image: "images/jackets/denim_sherpa.jpg", description: "Denim jacket with sherpa lining", alDescription: "Xhaketë xhinse me mbushje sherpa" },
+      { id: 49, name: "Cashmere Blend Coat", alName: "Pallto me Përzierje Cashmere", price: 16800, image: "images/jackets/cashmere.jpg", description: "Luxury cashmere blend winter coat", alDescription: "Pallto dimërore luksoze me përzierje cashmere" },
+      { id: 50, name: "Custom Embroidered Jacket", alName: "Xhaketë e Personalizuar me Broderi", price: 14500, image: "images/jackets/custom.jpg", description: "Personalized embroidered jacket", alDescription: "Xhaketë e personalizuar me broderi" }
+    ];
+
+    const productsPerPage = 8;
+    let currentPage = 1;
+    const totalPages = Math.ceil(products.length / productsPerPage);
+
+    const productGrid = document.getElementById("product-grid");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const firstBtn = document.getElementById("firstBtn");
+    const backBtn = document.getElementById("backBtn");
+    const pageStatus = document.getElementById("pageStatus");
+    const pageSelect = document.getElementById("pageSelect");
+
+    function getUrlParams() {
+      const params = {};
+      const queryString = window.location.search.substring(1);
+      const pairs = queryString.split('&');
+      
+      pairs.forEach(pair => {
+        const [key, value] = pair.split('=');
+        if (key && value) {
+          params[key] = decodeURIComponent(value);
+        }
+      });
+      
+      return params;
+    }
+
+    function highlightProduct(productId) {
+      const productElement = document.getElementById(`product-${productId}`);
+      if (productElement) {
+        productElement.classList.add('highlighted-product');
+        
+        setTimeout(() => {
+          const headerHeight = document.querySelector('.subproduct-header').offsetHeight;
+          const elementPosition = productElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    }
+
+    const urlParams = getUrlParams();
+    const highlightProductId = urlParams.highlight;
+    const requestedPage = urlParams.page ? parseInt(urlParams.page) : 1;
+
+    if (requestedPage && !isNaN(requestedPage) && requestedPage >= 1 && requestedPage <= totalPages) {
+      currentPage = requestedPage;
+    }
+
+    function renderProducts(page) {
+      productGrid.innerHTML = "";
+      const start = (page - 1) * productsPerPage;
+      const end = Math.min(start + productsPerPage, products.length);
+      const lang = localStorage.getItem("language") || "en";
+
+      for (let i = start; i < end; i++) {
+        const prod = products[i];
+        const col = document.createElement("div");
+        col.className = "col-12 col-sm-6 col-md-4 col-lg-3 product-col";
+        col.id = `product-${prod.id}`;
+
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <img src="${prod.image}" alt="${lang === 'al' ? prod.alName : prod.name}" class="img-fluid" onerror="this.onerror=null;this.src='images/jackets/default.jpg';" />
+          <div class="product-card-body">
+            <h3>${lang === 'al' ? prod.alName : prod.name}</h3>
+            <p data-key="jackets-desc" data-index="${prod.id}">${lang === 'al' ? prod.alDescription : prod.description}</p>
+            <p class="price">${lang === 'al' ? 'Cmimi' : 'Price'}: ${prod.price} L</p>
+            <a href="contact.html" class="btn" data-key="order-cta">${lang === 'al' ? 'Kontaktoni për Porosi' : 'Contact to Order'}</a>
+          </div>
+        `;
+        col.appendChild(card);
+        productGrid.appendChild(col);
+      }
+
+      pageStatus.textContent = `${page}/${totalPages}`;
+      prevBtn.disabled = page === 1;
+      nextBtn.disabled = page === totalPages;
+      firstBtn.style.display = page === totalPages && totalPages > 1 ? "inline-block" : "none";
+
+      pageSelect.innerHTML = "";
+      for (let i = 1; i <= totalPages; i++) {
+        const opt = document.createElement("option");
+        opt.value = i;
+        opt.textContent = `${lang === 'al' ? 'Faqja' : 'Page'} ${i}`;
+        if (i === page) opt.selected = true;
+        pageSelect.appendChild(opt);
+      }
+
+      if (highlightProductId) {
+        setTimeout(() => {
+          highlightProduct(highlightProductId);
+        }, 100);
+      }
+
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('page', page);
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderProducts(currentPage);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderProducts(currentPage);
+      }
+    });
+
+    firstBtn.addEventListener("click", () => {
+      currentPage = 1;
+      renderProducts(currentPage);
+    });
+
+    pageSelect.addEventListener("change", (e) => {
+      currentPage = parseInt(e.target.value);
+      renderProducts(currentPage);
+    });
+
+    backBtn.addEventListener("click", () => {
+      window.location.href = "products.html";
+    });
+
+    renderProducts(currentPage);
+  </script>
+  <script src="js/lang.js"></script>
+</body>
+</html>
